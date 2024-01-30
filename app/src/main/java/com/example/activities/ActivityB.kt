@@ -9,6 +9,15 @@ class ActivityB : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_b)
 
-        startActivity(Intent(this, ActivityC::class.java))
+        startActivityForResult(
+            Intent(this, ActivityC::class.java)
+                .putExtra("msg", "open C"),
+            0
+        )
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val result = intent.getStringExtra("back msg")
     }
 }
