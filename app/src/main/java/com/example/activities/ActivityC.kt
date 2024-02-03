@@ -5,42 +5,46 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 
-class ActivityA : AppCompatActivity() {
+class ActivityC : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("lifecycle", "onCreate: A")
-        setContentView(R.layout.activity_main)
+        Log.d("lifecycle", "onCreate: C")
+        setContentView(R.layout.activity_c)
 
-        startActivity(Intent(this, ActivityB::class.java))
+        val message = intent.getStringExtra("msg")
+
+        setResult(RESULT_OK, intent.putExtra("back msg", "back to C"))
     }
+
 
     override fun onStart() {
         super.onStart()
-        Log.d("lifecycle", "onStart: A")
+        Log.d("lifecycle", "onStart: C")
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d("lifecycle", "onResume: A")
+        Log.d("lifecycle", "onResume: C")
     }
 
     override fun onPause() {
         super.onPause()
-        Log.d("lifecycle", "onPause: A")
+        Log.d("lifecycle", "onPause: C")
     }
 
     override fun onStop() {
         super.onStop()
-        Log.d("lifecycle", "onStop: A")
+        Log.d("lifecycle", "onStop: C")
     }
 
     override fun onRestart() {
         super.onRestart()
-        Log.d("lifecycle", "onRestart: A")
+        Log.d("lifecycle", "onRestart: C")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d("lifecycle", "onDestroy: A")
+        Log.d("lifecycle", "onDestroy: C")
     }
+
 }
