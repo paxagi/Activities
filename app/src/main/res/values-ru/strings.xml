@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Активити</string>
+    <string name="description">описание</string>
+    <string name="hint_small_description">немного слов</string>
+    <string name="button">кнопка</string>
+    <string name="first_name">имя</string>
+    <string name="last_name">фамилия</string>
+    <string name="birth_date">день рождения</string>
+    <string name="country">страна</string>
+    <string name="apply">принять</string>
+</resources>

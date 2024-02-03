@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.EditText
 
 class ActivityB : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +21,10 @@ class ActivityB : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        val result = intent.getStringExtra("back msg")
+        data?.getStringExtra("back msg").toString()
+            .also {
+                findViewById<EditText>(R.id.editTextTextB).setText(it)
+            }
     }
 
     override fun onStart() {

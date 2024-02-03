@@ -17,19 +17,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="First Name"/>
+            android:id="@+id/first_name"
+            android:hint="@string/first_name"
+            android:autofillHints="Mike"
+            android:inputType="textPersonName" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Last Name"/>
+            android:hint="@string/last_name"
+            android:inputType="textPersonName"
+            android:importantForAutofill="no" />
     </LinearLayout>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Birth Date"/>
+        android:hint="@string/birth_date"
+        android:importantForAutofill="no" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -40,13 +46,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:hint="Country"/>
+            android:hint="@string/country"
+            android:inputType="textPostalAddress"
+            android:importantForAutofill="no" />
 
         <Button
+            android:id="@+id/btn_apply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Apply"/>
+            android:text="@string/apply"/>
     </LinearLayout>
 
 </LinearLayout>
