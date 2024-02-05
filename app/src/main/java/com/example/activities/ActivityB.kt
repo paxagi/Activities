@@ -4,16 +4,33 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 
 class ActivityB : AppCompatActivity() {
 
-    lateinit var editDescription: EditText
+    private lateinit var editDescription: EditText
+    private lateinit var textViews:Array<TextView>
+    private fun toastAndLogD(textView: View) {
+        Toast.makeText(this, "${textView.id}", Toast.LENGTH_SHORT).show()
+        Log.d("invoke", "toastAndLogD: touch a $textView")
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("lifecycle", "onCreate: B")
         setContentView(R.layout.activity_b)
         editDescription = findViewById<EditText>(R.id.editTextTextB)
+        textViews = Array<TextView>(5) {
+            i -> findViewById<ConstraintLayout>(R.id.textViews).getChildAt(i) as TextView
+        }
+        textViews.forEach {
+            it.setOnClickListener {
+                toastAndLogD(it)
+            }
+        }
 
         startActivityForResult(
             Intent(this, ActivityC::class.java)
