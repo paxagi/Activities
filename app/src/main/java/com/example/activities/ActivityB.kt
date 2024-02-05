@@ -7,10 +7,13 @@ import android.util.Log
 import android.widget.EditText
 
 class ActivityB : AppCompatActivity() {
+
+    lateinit var editDescription: EditText
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("lifecycle", "onCreate: B")
         setContentView(R.layout.activity_b)
+        editDescription = findViewById<EditText>(R.id.editTextTextB)
 
         startActivityForResult(
             Intent(this, ActivityC::class.java)
@@ -23,7 +26,7 @@ class ActivityB : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         data?.getStringExtra("back msg").toString()
             .also {
-                findViewById<EditText>(R.id.editTextTextB).setText(it)
+                editDescription.setText(it)
             }
     }
 
