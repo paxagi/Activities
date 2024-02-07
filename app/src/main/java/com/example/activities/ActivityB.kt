@@ -4,22 +4,29 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.EditText
 
 class ActivityB : AppCompatActivity() {
 
-    lateinit var editDescription: EditText
+    private val editDescription: EditText by lazy {
+        findViewById<EditText>(R.id.editTextTextB)
+    }
+
+    private val btnNextActivity: Button by lazy {
+        findViewById<Button>(R.id.bnt_go_to_activityC)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("lifecycle", "onCreate: B")
         setContentView(R.layout.activity_b)
-        editDescription = findViewById<EditText>(R.id.editTextTextB)
-
-        startActivityForResult(
-            Intent(this, ActivityC::class.java)
-                .putExtra("msg", "open C"),
-            0
-        )
+        btnNextActivity.setOnClickListener{
+            startActivityForResult(
+                Intent(this, ActivityC::class.java)
+                    .putExtra("msg", "open C"),
+                0
+            )
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
