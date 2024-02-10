@@ -9,4 +9,7 @@
     <string name="country">country</string>
     <string name="apply">apply</string>
     <string name="click_me">click me</string>
+    <string name="etCityLabel">city</string>
+    <string name="etStreetLabel">street</string>
+    <string name="etHouseLabel">house</string>
 </resources>
