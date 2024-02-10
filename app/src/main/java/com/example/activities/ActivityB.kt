@@ -25,10 +25,7 @@ class ActivityB : AppCompatActivity() {
     private val etsLayout: LinearLayout by lazy {
         findViewById(R.id.textViews)
     }
-    private fun toastAndLogD(textView: View) {
-        Toast.makeText(this, "${textView.id}", Toast.LENGTH_SHORT).show()
-        Log.d("invoke", "toastAndLogD: touch a $textView")
-    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("lifecycle", "onCreate: B")
