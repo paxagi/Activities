@@ -17,26 +17,36 @@ class ActivityB : AppCompatActivity() {
     private val editDescription: EditText by lazy {
         findViewById<EditText>(R.id.editTextTextB)
     }
-    private val textViews:Array<TextView> by lazy {
-        Array<TextView>(etsLayout.size) {
-                i -> etsLayout.getChildAt(i) as TextView
-        }
+    lateinit var textView1: TextView
+    lateinit var textView2: TextView
+    lateinit var textView3: TextView
+    lateinit var textView4: TextView
+    lateinit var textView5: TextView
+
+    private fun initViews() {
+        textView1 = findViewById(R.id.textView1)
+        textView2 = findViewById(R.id.textView2)
+        textView3 = findViewById(R.id.textView3)
+        textView4 = findViewById(R.id.textView4)
+        textView5 = findViewById(R.id.textView5)
+
     }
-    private val etsLayout: LinearLayout by lazy {
-        findViewById(R.id.textViews)
+
+    private fun showToastAndLogD(textView: View) {
+        Toast.makeText(this, "${textView.id}", Toast.LENGTH_SHORT).show()
+        Log.d("invoke", "toastAndLogD: touch a $textView")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("lifecycle", "onCreate: B")
         setContentView(R.layout.activity_b)
-
-        textViews.forEach {
-            it.setOnClickListener {
-                Toast.makeText(this, "${it.id}", Toast.LENGTH_SHORT).show()
-                Log.d("invoke", "toastAndLogD: touch a $it")
-            }
-        }
+        initViews()
+        textView1.setOnClickListener { showToastAndLogD(it) }
+        textView2.setOnClickListener { showToastAndLogD(it) }
+        textView3.setOnClickListener { showToastAndLogD(it) }
+        textView4.setOnClickListener { showToastAndLogD(it) }
+        textView5.setOnClickListener { showToastAndLogD(it) }
 
         startActivityForResult(
             Intent(this, ActivityC::class.java)
