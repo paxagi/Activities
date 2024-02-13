@@ -10,25 +10,30 @@ import android.widget.EditText
 import android.widget.Toast
 
 class ActivityA : AppCompatActivity() {
-    private val name: String
-        get() = findViewById<EditText>(R.id.first_name).text.toString()
-
-    private fun showNameInToast(button: View) {
-        Toast.makeText(
-            this,
-            name,
-            Toast.LENGTH_SHORT
-        ).show()
-        Log.d("listener", "name: $name")
+    private val etName: EditText by lazy {
+        findViewById<EditText>(R.id.first_name)
     }
+    private val btnNextActivity: Button by lazy {
+        findViewById<Button>(R.id.bnt_go_to_activityB)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("lifecycle", "onCreate: A")
 
         setContentView(R.layout.activity_main)
-        findViewById<Button>(R.id.btn_apply).setOnClickListener { showNameInToast(it) }
+        findViewById<Button>(R.id.btn_apply).setOnClickListener {
+            Toast.makeText(
+                this,
+                etName.text.toString(),
+                Toast.LENGTH_SHORT
+            ).show()
+            Log.d("listener", "name: $etName.text.toString()")
+        }
 
-        startActivity(Intent(this, ActivityB::class.java))
+        btnNextActivity.setOnClickListener {
+            startActivity(Intent(this, ActivityB::class.java))
+        }
     }
 
     override fun onStart() {

@@ -9,4 +9,5 @@
     <string name="country">country</string>
     <string name="apply">apply</string>
     <string name="click_me">click me</string>
+    <string name="nextActivityButtonLabel">next screen</string>
 </resources>
