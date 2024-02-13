@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -20,20 +19,19 @@ class ActivityA : AppCompatActivity() {
 private val name: String
         get() = findViewById<EditText>(R.id.first_name).text.toString()
 
-    private fun showNameInToast(button: View) {
-        Toast.makeText(
-            this,
-            name,
-            Toast.LENGTH_SHORT
-        ).show()
-        Log.d("listener", "name: $name")
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("lifecycle", "onCreate: A")
 
         setContentView(R.layout.activity_main)
-        findViewById<Button>(R.id.btn_apply).setOnClickListener { showNameInToast(it) }
+        findViewById<Button>(R.id.btn_apply).setOnClickListener {
+            Toast.makeText(
+                this,
+                name,
+                Toast.LENGTH_SHORT
+            ).show()
+            Log.d("listener", "name: $name")
+        }
         fun etLogD(text: Editable?) = Log.d("etListen", "text changed: $text")
         city.addTextChangedListener { etLogD(it) }
         street.addTextChangedListener { etLogD(it) }
