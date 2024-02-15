@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="15dp"
+    android:padding="@dimen/standard_padding"
     tools:context=".ActivityA">
 
     <LinearLayout
@@ -39,6 +38,43 @@
         android:hint="@string/birth_date"
         android:importantForAutofill="no"
         android:textSize="?attr/minTouchTargetSize" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:inputType="text"
+            android:id="@+id/etCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:hint="@string/etCityLabel"
+            android:background="#1122cc"
+            android:ems="10" />
+
+        <EditText
+            android:id="@+id/etStreet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="#119911"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="@string/etStreetLabel" />
+
+        <EditText
+            android:id="@+id/etHouse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="#995533"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="@string/etHouseLabel" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
