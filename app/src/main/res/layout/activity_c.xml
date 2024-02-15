@@ -13,13 +13,13 @@
         android:layout_height="wrap_content"
         android:text="@string/description"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintEnd_toStartOf="@+id/editTextText4"
+        app:layout_constraintEnd_toStartOf="@+id/edit_description"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextText4"
+        android:id="@+id/edit_description"
         android:layout_width="@dimen/constraint_match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/standard_padding"

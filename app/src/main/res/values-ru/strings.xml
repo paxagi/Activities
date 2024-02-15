@@ -10,6 +10,7 @@
     <string name="country">страна</string>
     <string name="apply">принять</string>
     <string name="click_me">клацни</string>
+    <string name="nextActivityButtonLabel">далее</string>
     <string name="etCityLabel">город</string>
     <string name="etStreetLabel">улица</string>
     <string name="etHouseLabel">дом</string>
