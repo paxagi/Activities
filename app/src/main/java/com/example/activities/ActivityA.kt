@@ -17,6 +17,7 @@ class ActivityA : AppCompatActivity() {
     private lateinit var street: EditText
     private lateinit var house: EditText
     private lateinit var btnApply: Button
+    private lateinit var btnShowToast: Button
 
     private fun initViews() {
         etName = findViewById<EditText>(R.id.first_name)
@@ -25,6 +26,7 @@ class ActivityA : AppCompatActivity() {
         street = findViewById(R.id.etStreet)
         house = findViewById(R.id.etHouse)
         btnApply = findViewById<Button>(R.id.btn_apply)
+        btnShowToast = findViewById<Button>(R.id.btnShowToast)
     }
 
 
@@ -51,6 +53,14 @@ class ActivityA : AppCompatActivity() {
 
         btnNextActivity.setOnClickListener {
             startActivity(Intent(this, ActivityB::class.java))
+        }
+
+        btnShowToast.setOnClickListener {
+            Toast(this).apply {
+                duration = Toast.LENGTH_LONG
+                view = layoutInflater.inflate(R.layout.custom_toast, null)
+                show()
+            }
         }
     }
 

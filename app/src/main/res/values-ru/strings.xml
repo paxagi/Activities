@@ -14,4 +14,6 @@
     <string name="etCityLabel">город</string>
     <string name="etStreetLabel">улица</string>
     <string name="etHouseLabel">дом</string>
+    <string name="showToastButtonLabel">Показать тост</string>
+    <string name="customToastLabel">Собранный на коленке Тост!</string>
 </resources>
