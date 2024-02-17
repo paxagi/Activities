@@ -14,4 +14,10 @@
     <string name="etCityLabel">город</string>
     <string name="etStreetLabel">улица</string>
     <string name="etHouseLabel">дом</string>
+    <string name="rbBeefLabel">говядина</string>
+    <string name="rbChickenLabel">курица</string>
+    <string name="rbPorkLabel">свинина</string>
+    <string name="cbCheeseLabel">сыыыыр</string>
+    <string name="cbOnionLabel">лук</string>
+    <string name="cbSaladLabel">салат</string>
 </resources>

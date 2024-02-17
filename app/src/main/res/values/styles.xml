@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SelectableGreen" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@android:color/holo_green_dark</item>
+    </style>
+    <style name="SelectableBlue" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@android:color/holo_blue_dark</item>
+    </style>
+    <style name="SelectablePink" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/DeepPink</item>
+    </style>
+</resources>

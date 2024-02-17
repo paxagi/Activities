@@ -8,7 +8,7 @@
     tools:context=".ActivityC">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_header_description"
         android:layout_width="@dimen/constraint_match_parent"
         android:layout_height="wrap_content"
         android:text="@string/description"
@@ -27,10 +27,67 @@
         android:ems="10"
         android:hint="@string/hint_small_description"
         android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_header_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/tv_header_description" />
+
+    <RadioGroup
+        android:id="@+id/rgMeat"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_description">
+
+        <RadioButton
+            android:id="@+id/rbBeef"
+            android:text="@string/rbBeefLabel"
+            android:theme="@style/SelectableBlue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/rbChicken"
+            android:text="@string/rbChickenLabel"
+            android:theme="@style/SelectableGreen"
+            android:checked="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/rbPork"
+            android:text="@string/rbPorkLabel"
+            android:theme="@style/SelectablePink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/cbCheese"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/SelectableGreen"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rgMeat"
+        android:text="@string/cbCheeseLabel" />
+
+    <CheckBox
+        android:id="@+id/cbOnion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/SelectableGreen"
+        app:layout_constraintStart_toEndOf="@id/cbCheese"
+        app:layout_constraintTop_toTopOf="@id/cbCheese"
+        android:text="@string/cbOnionLabel" />
+
+    <CheckBox
+        android:id="@+id/cbSalad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/SelectableGreen"
+        app:layout_constraintStart_toEndOf="@id/cbOnion"
+        app:layout_constraintTop_toTopOf="@id/cbOnion"
+        android:text="@string/cbSaladLabel" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -75,13 +132,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85499316" />
+        app:layout_constraintGuide_percent="0.85" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15868673" />
+        app:layout_constraintGuide_percent="0.38" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
