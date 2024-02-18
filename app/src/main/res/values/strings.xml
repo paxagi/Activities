@@ -13,6 +13,8 @@
     <string name="etCityLabel">city</string>
     <string name="etStreetLabel">street</string>
     <string name="etHouseLabel">house</string>
+    <string name="showToastButtonLabel">Show Toast</string>
+    <string name="customToastLabel">This is a custom toast!</string>
     <string name="rbBeefLabel">beef</string>
     <string name="rbChickenLabel">chicken</string>
     <string name="rbPorkLabel">pork</string>
