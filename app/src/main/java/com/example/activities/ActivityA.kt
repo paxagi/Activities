@@ -18,6 +18,9 @@ class ActivityA : AppCompatActivity() {
     private lateinit var house: EditText
     private lateinit var btnApply: Button
     private lateinit var btnShowToast: Button
+    private lateinit var etSurname: EditText
+    private lateinit var etBirthday: EditText
+    private lateinit var etCountry: EditText
 
     private fun initViews() {
         etName = findViewById<EditText>(R.id.first_name)
@@ -27,6 +30,9 @@ class ActivityA : AppCompatActivity() {
         house = findViewById(R.id.etHouse)
         btnApply = findViewById<Button>(R.id.btn_apply)
         btnShowToast = findViewById<Button>(R.id.btnShowToast)
+        etSurname = findViewById<EditText>(R.id.etSurname)
+        etBirthday = findViewById<EditText>(R.id.editBirthday)
+        etCountry = findViewById<EditText>(R.id.etCountry)
     }
 
 
@@ -51,8 +57,16 @@ class ActivityA : AppCompatActivity() {
         street.addTextChangedListener { etLogD(it) }
         house.addTextChangedListener { etLogD(it) }
 
+
         btnNextActivity.setOnClickListener {
-            startActivity(Intent(this, ActivityB::class.java))
+            val name = etName.text.toString()
+            val surname = etSurname.text.toString()
+            val birthday = etBirthday.text.toString()
+            val country = etCountry.text.toString()
+            Intent(this, ActivityB::class.java).also {
+                it.putExtra("EXTRA_PERSON", Person(name, surname, birthday, country))
+                startActivity(it)
+            }
         }
 
         btnShowToast.setOnClickListener {
