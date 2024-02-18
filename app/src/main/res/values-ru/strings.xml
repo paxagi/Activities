@@ -16,4 +16,10 @@
     <string name="etHouseLabel">дом</string>
     <string name="showToastButtonLabel">Показать тост</string>
     <string name="customToastLabel">Собранный на коленке Тост!</string>
+    <string name="rbBeefLabel">говядина</string>
+    <string name="rbChickenLabel">курица</string>
+    <string name="rbPorkLabel">свинина</string>
+    <string name="cbCheeseLabel">сыыыыр</string>
+    <string name="cbOnionLabel">лук</string>
+    <string name="cbSaladLabel">салат</string>
 </resources>

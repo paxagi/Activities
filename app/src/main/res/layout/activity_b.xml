@@ -8,7 +8,7 @@
     tools:context=".ActivityB">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_header_description"
         android:layout_width="@dimen/constraint_match_parent"
         android:layout_height="?attr/minTouchTargetSize"
         android:text="@string/description"
@@ -26,7 +26,7 @@
         android:hint="@string/hint_small_description"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/tv_header_description"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -41,7 +41,7 @@
         app:layout_constraintEnd_toStartOf="@+id/imageView2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_header_description" />
 
     <ImageView
         android:id="@+id/imageView2"
