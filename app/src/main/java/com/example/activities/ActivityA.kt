@@ -59,7 +59,7 @@ class ActivityA : AppCompatActivity() {
         ) == PackageManager.PERMISSION_GRANTED
 
     private fun requestPermission() {
-        var permissionsToRequest = mutableListOf<String>()
+        val permissionsToRequest = mutableListOf<String>()
         if (!hasReadExternalStoragePermission()) {
             permissionsToRequest.add(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
@@ -75,6 +75,8 @@ class ActivityA : AppCompatActivity() {
 
         if (permissionsToRequest.isNotEmpty()) {
             ActivityCompat.requestPermissions(this, permissionsToRequest.toTypedArray(), 0)
+        } else {
+            Log.d("permissions", "all necessary permissions has been granted")
         }
     }
 
@@ -90,8 +92,6 @@ class ActivityA : AppCompatActivity() {
                     Log.d("permissions", "${permissions[i]} granted")
                 }
             }
-        } else {
-            Log.d("permissions", "all necessary permissions has been granted")
         }
     }
 
