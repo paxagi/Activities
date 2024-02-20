@@ -1,6 +1,8 @@
 package com.example.activities
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -8,6 +10,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.core.widget.addTextChangedListener
 
 class ActivityA : AppCompatActivity() {
@@ -18,6 +21,7 @@ class ActivityA : AppCompatActivity() {
     private lateinit var house: EditText
     private lateinit var btnApply: Button
     private lateinit var btnShowToast: Button
+    private lateinit var btnRequestPermissions: Button
 
     private fun initViews() {
         etName = findViewById<EditText>(R.id.first_name)
@@ -27,6 +31,68 @@ class ActivityA : AppCompatActivity() {
         house = findViewById(R.id.etHouse)
         btnApply = findViewById<Button>(R.id.btn_apply)
         btnShowToast = findViewById<Button>(R.id.btnShowToast)
+        btnRequestPermissions = findViewById<Button>(R.id.btnRequestPermissions)
+    }
+
+    private fun hasReadExternalStoragePermission() =
+        ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED
+
+    private fun hasBackgroundLocationPermission() =
+        ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_BACKGROUND_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+
+    private fun hasCoarseLocationPermission() =
+        ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+
+    private fun hasBluetoothPermission() =
+        ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.BLUETOOTH
+        ) == PackageManager.PERMISSION_GRANTED
+
+    private fun requestPermission() {
+        var permissionsToRequest = mutableListOf<String>()
+        if (!hasReadExternalStoragePermission()) {
+            permissionsToRequest.add(Manifest.permission.READ_EXTERNAL_STORAGE)
+        }
+        if (!hasBackgroundLocationPermission()) {
+            permissionsToRequest.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+        }
+        if (!hasCoarseLocationPermission()) {
+            permissionsToRequest.add(Manifest.permission.ACCESS_COARSE_LOCATION)
+        }
+        if (!hasBluetoothPermission()) {
+            permissionsToRequest.add(Manifest.permission.BLUETOOTH)
+        }
+
+        if (permissionsToRequest.isNotEmpty()) {
+            ActivityCompat.requestPermissions(this, permissionsToRequest.toTypedArray(), 0)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 0 && grantResults.isNotEmpty()) {
+            for (i in grantResults.indices) {
+                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("permissions", "${permissions[i]} granted")
+                }
+            }
+        } else {
+            Log.d("permissions", "all necessary permissions has been granted")
+        }
     }
 
 
@@ -61,6 +127,10 @@ class ActivityA : AppCompatActivity() {
                 view = layoutInflater.inflate(R.layout.custom_toast, null)
                 show()
             }
+        }
+
+        btnRequestPermissions.setOnClickListener {
+            requestPermission()
         }
     }
 
