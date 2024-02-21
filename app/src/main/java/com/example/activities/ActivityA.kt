@@ -64,7 +64,7 @@ class ActivityA : AppCompatActivity() {
             val birthday = etBirthday.text.toString()
             val country = etCountry.text.toString()
             Intent(this, ActivityB::class.java).also {
-                it.putExtra("EXTRA_PERSON", Person(name, surname, birthday, country))
+                it.putExtra(EXTRA_PERSON_DATA_NAME, Person(name, surname, birthday, country))
                 startActivity(it)
             }
         }
@@ -108,3 +108,5 @@ class ActivityA : AppCompatActivity() {
         Log.d("lifecycle", "onDestroy: A")
     }
 }
+
+const val EXTRA_PERSON_DATA_NAME = "EXTRA_PERSON"

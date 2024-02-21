@@ -4,16 +4,16 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class Person(
-    val name: String?,
-    val surname: String?,
-    val birthday: String?,
-    val country: String?,
+    val name: String,
+    val surname: String,
+    val birthday: String,
+    val country: String,
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
     ) {
     }
 
@@ -29,10 +29,10 @@ data class Person(
     companion object CREATOR : Parcelable.Creator<Person> {
         override fun createFromParcel(parcel: Parcel): Person {
             return Person(
-                name = parcel.readString(),
-                surname = parcel.readString(),
-                birthday = parcel.readString(),
-                country = parcel.readString(),
+                name = parcel.readString()!!,
+                surname = parcel.readString()!!,
+                birthday = parcel.readString()!!,
+                country = parcel.readString()!!,
             )
         }
 

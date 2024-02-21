@@ -1,6 +1,7 @@
 package com.example.activities
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -46,7 +47,11 @@ class ActivityB : AppCompatActivity() {
         setContentView(R.layout.activity_b)
         initViews()
 
-        val person = intent.getSerializableExtra("EXTRA_PERSON") as Person
+        val person = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(EXTRA_PERSON_DATA_NAME, Person::class.java)!! as Person
+        } else {
+            intent.getParcelableExtra<Person>(EXTRA_PERSON_DATA_NAME) as Person
+        }
         textView1.also {
             it.text = "${getString(R.string.tvPersonLabel)} ${person.name}"
         }
