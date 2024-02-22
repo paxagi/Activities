@@ -125,4 +125,10 @@
         android:layout_height="wrap_content"
         android:text="@string/showToastButtonLabel" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnRequestPermissionsLabel"
+        android:id="@+id/btnRequestPermissions" />
+
 </LinearLayout>

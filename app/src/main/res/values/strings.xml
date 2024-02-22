@@ -22,4 +22,5 @@
     <string name="cbOnionLabel">onion</string>
     <string name="cbSaladLabel">salad</string>
     <string name="tvPersonLabel">person</string>
+    <string name="btnRequestPermissionsLabel">request permissions</string>
 </resources>
