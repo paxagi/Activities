@@ -22,5 +22,6 @@
     <string name="cbCheeseLabel">сыыыыр</string>
     <string name="cbOnionLabel">лук</string>
     <string name="cbSaladLabel">салат</string>
+    <string name="tvPersonLabel">персонаж</string>
     <string name="btnRequestPermissionsLabel">запрос разрешений</string>
 </resources>

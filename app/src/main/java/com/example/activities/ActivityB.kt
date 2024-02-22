@@ -1,6 +1,7 @@
 package com.example.activities
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -32,8 +33,11 @@ class ActivityB : AppCompatActivity() {
 
     }
 
-    private fun showToastAndLogD(textView: View) {
-        Toast.makeText(this, "${textView.id}", Toast.LENGTH_SHORT).show()
+    private fun showToastAndLogD(
+        textView: View,
+        alternativeMessage: String? = textView.id.toString()
+    ) {
+        Toast.makeText(this, "$alternativeMessage", Toast.LENGTH_SHORT).show()
         Log.d("invoke", "toastAndLogD: touch a $textView")
     }
 
@@ -41,9 +45,18 @@ class ActivityB : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Log.d("lifecycle", "onCreate: B")
         setContentView(R.layout.activity_b)
-
         initViews()
-        textView1.setOnClickListener { showToastAndLogD(it) }
+
+        val person = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(EXTRA_PERSON_DATA_NAME, Person::class.java)!! as Person
+        } else {
+            intent.getParcelableExtra<Person>(EXTRA_PERSON_DATA_NAME) as Person
+        }
+        textView1.also {
+            it.text = "${getString(R.string.tvPersonLabel)} ${person.name}"
+        }
+
+        textView1.setOnClickListener { showToastAndLogD(it, person.toString()) }
         textView2.setOnClickListener { showToastAndLogD(it) }
         textView3.setOnClickListener { showToastAndLogD(it) }
         textView4.setOnClickListener { showToastAndLogD(it) }
