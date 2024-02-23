@@ -90,7 +90,7 @@
         android:text="@string/cbSaladLabel" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivPhoto"
         android:layout_width="@dimen/constraint_match_parent"
         android:layout_height="@dimen/constraint_match_parent"
         android:layout_marginTop="@dimen/standard_padding"
@@ -103,7 +103,7 @@
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnTakePhotoOrPDF"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/constraint_match_parent"
         android:layout_marginBottom="@dimen/standard_padding"
@@ -122,7 +122,7 @@
         android:layout_marginRight="@dimen/standard_padding"
         android:layout_marginBottom="@dimen/standard_padding"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/btnTakePhotoOrPDF"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />

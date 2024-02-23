@@ -1,12 +1,20 @@
 package com.example.activities
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.Toast
 
 class ActivityC : AppCompatActivity() {
     private lateinit var editDescription: EditText
+    private lateinit var ivPhoto: ImageView
+    private lateinit var btnTakePhotoOrPDF: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("lifecycle", "onCreate: C")
@@ -14,9 +22,29 @@ class ActivityC : AppCompatActivity() {
 
         val message = intent.getStringExtra("msg")
         editDescription = findViewById<EditText>(R.id.edit_description)
+        ivPhoto = findViewById<ImageView>(R.id.ivPhoto)
+        btnTakePhotoOrPDF = findViewById<Button>(R.id.btnTakePhotoOrPDF)
 
         editDescription.setText(message)
         setResult(RESULT_OK, intent.putExtra("back msg", "back to C"))
+
+        btnTakePhotoOrPDF.setOnClickListener {
+            Intent(Intent.ACTION_GET_CONTENT).also {
+                it.addCategory(Intent.CATEGORY_OPENABLE)
+                val mimeTypes = arrayOf("image/*", "application/pdf")
+                it.setType("*/*")
+                it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+                startActivityForResult(it, 0)
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK && requestCode == 0) {
+            val file = data?.data
+            ivPhoto.setImageURI(file)
+        }
     }
 
 
