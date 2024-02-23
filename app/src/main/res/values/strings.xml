@@ -23,4 +23,7 @@
     <string name="cbSaladLabel">salad</string>
     <string name="tvPersonLabel">person</string>
     <string name="btnRequestPermissionsLabel">request permissions</string>
+    <string name="empty_text" translatable="false" />
+    <string name="PDF_Selected">It\'s PDF file</string>
+    <string name="unknownTypeOfFile">Not ok, wrong file</string>
 </resources>

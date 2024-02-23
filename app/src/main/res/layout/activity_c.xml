@@ -89,8 +89,16 @@
         app:layout_constraintTop_toTopOf="@id/cbOnion"
         android:text="@string/cbSaladLabel" />
 
+    <TextView
+        android:id="@+id/statusOfSelectedResource"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/empty_text"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <ImageView
-        android:id="@+id/ivPhoto"
+        android:id="@+id/ivPhotoOrPDF"
         android:layout_width="@dimen/constraint_match_parent"
         android:layout_height="@dimen/constraint_match_parent"
         android:layout_marginTop="@dimen/standard_padding"

@@ -1,20 +1,19 @@
 package com.example.activities
 
-import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.Toast
+import android.widget.TextView
 
 class ActivityC : AppCompatActivity() {
     private lateinit var editDescription: EditText
     private lateinit var ivPhoto: ImageView
     private lateinit var btnTakePhotoOrPDF: Button
+    private lateinit var statusOfSelectedResource: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("lifecycle", "onCreate: C")
@@ -22,8 +21,9 @@ class ActivityC : AppCompatActivity() {
 
         val message = intent.getStringExtra("msg")
         editDescription = findViewById<EditText>(R.id.edit_description)
-        ivPhoto = findViewById<ImageView>(R.id.ivPhoto)
+        ivPhoto = findViewById<ImageView>(R.id.ivPhotoOrPDF)
         btnTakePhotoOrPDF = findViewById<Button>(R.id.btnTakePhotoOrPDF)
+        statusOfSelectedResource = findViewById<TextView>(R.id.statusOfSelectedResource)
 
         editDescription.setText(message)
         setResult(RESULT_OK, intent.putExtra("back msg", "back to C"))
@@ -43,7 +43,19 @@ class ActivityC : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK && requestCode == 0) {
             val file = data?.data
-            ivPhoto.setImageURI(file)
+            val type = file?.let { this.contentResolver.getType(it) }
+            if (type.isNullOrEmpty()) {
+                statusOfSelectedResource.text = getString(R.string.unknownTypeOfFile)
+            } else {
+                if (type.contains("image/")) {
+                    ivPhoto.setImageURI(file)
+                    statusOfSelectedResource.text = getString(R.string.empty_text)
+                }
+                if (type.contains("application/pdf")) {
+                    statusOfSelectedResource.text = getString(R.string.PDF_Selected)
+                    ivPhoto.setImageURI(null)
+                }
+            }
         }
     }
 
