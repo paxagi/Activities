@@ -24,4 +24,6 @@
     <string name="cbSaladLabel">салат</string>
     <string name="tvPersonLabel">персонаж</string>
     <string name="btnRequestPermissionsLabel">запрос разрешений</string>
+    <string name="explicationOfLocationRequest">Пожалуйста, разрешите доступ на геолокацию, это поможет показывать вам более релевантные ответы на ваши запросы.</string>
+    <string name="LocationRequestMessageTitle">Запрос локации</string>
 </resources>

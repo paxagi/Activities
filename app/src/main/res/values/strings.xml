@@ -23,4 +23,6 @@
     <string name="cbSaladLabel">salad</string>
     <string name="tvPersonLabel">person</string>
     <string name="btnRequestPermissionsLabel">request permissions</string>
+    <string name="explicationOfLocationRequest">Please allow geolocation access to help show you more relevant answers to your queries.</string>
+    <string name="LocationRequestMessageTitle">Your Location Request</string>
 </resources>

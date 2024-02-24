@@ -10,6 +10,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.widget.addTextChangedListener
 
@@ -66,23 +67,44 @@ class ActivityA : AppCompatActivity() {
         ) == PackageManager.PERMISSION_GRANTED
 
     private fun requestPermission() {
-        val permissionsToRequest = mutableListOf<String>()
+        val clearPurposePermissionsToRequest = mutableListOf<String>()
+        val locationPermissionSToRequest = mutableListOf<String>()
         if (!hasReadExternalStoragePermission()) {
-            permissionsToRequest.add(Manifest.permission.READ_EXTERNAL_STORAGE)
+            clearPurposePermissionsToRequest.add(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
         if (!hasBackgroundLocationPermission()) {
-            permissionsToRequest.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+            locationPermissionSToRequest.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
         }
         if (!hasCoarseLocationPermission()) {
-            permissionsToRequest.add(Manifest.permission.ACCESS_COARSE_LOCATION)
+            locationPermissionSToRequest.add(Manifest.permission.ACCESS_COARSE_LOCATION)
         }
         if (!hasBluetoothPermission()) {
-            permissionsToRequest.add(Manifest.permission.BLUETOOTH)
+            clearPurposePermissionsToRequest.add(Manifest.permission.BLUETOOTH)
         }
 
-        if (permissionsToRequest.isNotEmpty()) {
-            ActivityCompat.requestPermissions(this, permissionsToRequest.toTypedArray(), 0)
-        } else {
+        if (clearPurposePermissionsToRequest.isNotEmpty()) {
+            ActivityCompat.requestPermissions(
+                this,
+                clearPurposePermissionsToRequest.toTypedArray(),
+                CLEAR_PURPOSE_PERMISSIONS_REQUESTS_CODE
+            )
+        }
+        if (locationPermissionSToRequest.isNotEmpty()) {
+            AlertDialog.Builder(this)
+                .setTitle(R.string.LocationRequestMessageTitle)
+                .setMessage(R.string.explicationOfLocationRequest)
+                .setIcon(R.drawable.ic_location_request)
+                .setPositiveButton("Allow") { _, _ ->
+                    ActivityCompat.requestPermissions(
+                        this,
+                        locationPermissionSToRequest.toTypedArray(),
+                        LOCATION_PERMISSIONS_REQUESTS_CODE
+                    )
+                }
+                .create()
+                .also { it.show() }
+        }
+        if (clearPurposePermissionsToRequest.isEmpty() && locationPermissionSToRequest.isEmpty()) {
             Log.d("permissions", "all necessary permissions has been granted")
         }
     }
@@ -181,3 +203,5 @@ class ActivityA : AppCompatActivity() {
 }
 
 const val EXTRA_PERSON_DATA_NAME = "EXTRA_PERSON"
+const val CLEAR_PURPOSE_PERMISSIONS_REQUESTS_CODE = 0
+const val LOCATION_PERMISSIONS_REQUESTS_CODE = 1
