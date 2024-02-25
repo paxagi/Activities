@@ -23,4 +23,9 @@
     <string name="cbSaladLabel">salad</string>
     <string name="tvPersonLabel">person</string>
     <string name="btnRequestPermissionsLabel">request permissions</string>
+    <string name="settingLabel">Setting</string>
+    <string name="addContactLabel">Add Contact</string>
+    <string name="favoritesLabel">Favorites</string>
+    <string name="feedbackRequest">Give Feedback</string>
+    <string name="closeLabel">Close</string>
 </resources>

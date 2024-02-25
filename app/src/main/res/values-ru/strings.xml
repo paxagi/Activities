@@ -24,4 +24,9 @@
     <string name="cbSaladLabel">салат</string>
     <string name="tvPersonLabel">персонаж</string>
     <string name="btnRequestPermissionsLabel">запрос разрешений</string>
+    <string name="settingLabel">Настройки</string>
+    <string name="addContactLabel">Добавить контакт</string>
+    <string name="favoritesLabel">Избранное</string>
+    <string name="feedbackRequest">Дать обратную связь</string>
+    <string name="closeLabel">Закрыть</string>
 </resources>
