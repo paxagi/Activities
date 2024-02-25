@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.view.MenuItem
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -89,5 +90,8 @@ class ActivityC : AppCompatActivity() {
         super.onDestroy()
         Log.d("lifecycle", "onDestroy: C")
     }
+
+    override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean = MenuListener().create(this, menu)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = MenuListener().itemSelected(this, item)
 
 }

@@ -26,4 +26,9 @@
     <string name="empty_text" translatable="false" />
     <string name="PDF_Selected">It\'s PDF file</string>
     <string name="unknownTypeOfFile">Not ok, wrong file</string>
+    <string name="settingLabel">Setting</string>
+    <string name="addContactLabel">Add Contact</string>
+    <string name="favoritesLabel">Favorites</string>
+    <string name="feedbackRequest">Give Feedback</string>
+    <string name="closeLabel">Close</string>
 </resources>
