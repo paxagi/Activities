@@ -23,4 +23,14 @@
     <string name="cbSaladLabel">salad</string>
     <string name="tvPersonLabel">person</string>
     <string name="btnRequestPermissionsLabel">request permissions</string>
+    <string name="explicationOfLocationRequest">Please allow geolocation access to help show you more relevant answers to your queries.</string>
+    <string name="LocationRequestMessageTitle">Your Location Request</string>
+    <string name="empty_text" translatable="false" />
+    <string name="PDF_Selected">It\'s PDF file</string>
+    <string name="unknownTypeOfFile">Not ok, wrong file</string>
+    <string name="settingLabel">Setting</string>
+    <string name="addContactLabel">Add Contact</string>
+    <string name="favoritesLabel">Favorites</string>
+    <string name="feedbackRequest">Give Feedback</string>
+    <string name="closeLabel">Close</string>
 </resources>
