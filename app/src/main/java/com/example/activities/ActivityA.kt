@@ -7,10 +7,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ArrayAdapter
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -28,6 +33,8 @@ class ActivityA : AppCompatActivity() {
     private lateinit var etBirthday: EditText
     private lateinit var etCountry: EditText
     private lateinit var btnRequestPermissions: Button
+    private lateinit var spDifficultLevels: Spinner
+    private lateinit var difficultLevels: List<String>
 
     private fun initViews() {
         etName = findViewById(R.id.first_name)
@@ -41,6 +48,8 @@ class ActivityA : AppCompatActivity() {
         etBirthday = findViewById<EditText>(R.id.editBirthday)
         etCountry = findViewById<EditText>(R.id.etCountry)
         btnRequestPermissions = findViewById<Button>(R.id.btnRequestPermissions)
+        spDifficultLevels = findViewById(R.id.spDifficultLevels)
+        difficultLevels = resources.getStringArray(R.array.difficultLevels).toList()
     }
 
     private fun hasReadExternalStoragePermission() =
@@ -153,6 +162,29 @@ class ActivityA : AppCompatActivity() {
 
         btnRequestPermissions.setOnClickListener {
             requestPermission()
+        }
+
+        spDifficultLevels.adapter = ArrayAdapter(
+            this,
+            androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
+            difficultLevels
+        )
+        spDifficultLevels.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                btnNextActivity.scaleX = when(position) {
+                    0 -> 1F
+                    1 -> 0.1F
+                    2 -> 0.01F
+                    else -> { btnNextActivity.textSize }
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
     }
 

@@ -104,6 +104,11 @@
 
     </LinearLayout>
 
+    <Spinner
+        android:id="@+id/spDifficultLevels"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -112,7 +117,7 @@
         <Button
             android:id="@+id/bnt_go_to_activityB"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/nextActivityButtonLabel"
             android:textSize="?attr/minTouchTargetSize" />
