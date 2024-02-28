@@ -1,5 +1,6 @@
 package com.example.activities
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,24 +11,25 @@ import androidx.recyclerview.widget.RecyclerView
 class InterestsAdapter (
     private var interests: List<Interest>
 ) : RecyclerView.Adapter<InterestsAdapter.InterestsViewHolder>() {
-    private lateinit var tvTitle: TextView
-    private lateinit var ivLogo: ImageView
-    inner class InterestsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class InterestsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val title: TextView = itemView.findViewById<TextView>(R.id.tvTitle)
+        val logo: ImageView = itemView.findViewById<ImageView>(R.id.ivLogo)
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): InterestsViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_interests, parent, false)
+        Log.d("recycle", "onCreateViewHolder")
         return InterestsViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: InterestsViewHolder, position: Int) {
-        holder.itemView.apply {
-            tvTitle = this.findViewById<TextView>(R.id.tvTitle)
-            ivLogo = this.findViewById<ImageView>(R.id.ivLogo)
-            tvTitle.text = interests[position].title
-            ivLogo.setImageResource(interests[position].image)
+        Log.d("recycle", "onBindViewHolder")
+        holder.apply {
+            this.title.text = interests[position].title
+            this.logo.setImageResource(interests[position].image)
         }
     }
 
