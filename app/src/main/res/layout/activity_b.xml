@@ -144,18 +144,19 @@
         app:layout_constraintGuide_percent="0.88235295" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/targetActivity"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/bnt_go_to_activityC"
-        app:layout_constraintEnd_toStartOf="@+id/bnt_go_to_activityC"
+        android:entries="@array/activityForkFromActivityB"
+        app:layout_constraintBottom_toBottomOf="@+id/bnt_go_to_activity_C_or_D"
+        app:layout_constraintEnd_toStartOf="@+id/bnt_go_to_activity_C_or_D"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bnt_go_to_activityC" />
+        app:layout_constraintTop_toTopOf="@+id/bnt_go_to_activity_C_or_D" />
 
     <Button
-        android:id="@+id/bnt_go_to_activityC"
+        android:id="@+id/bnt_go_to_activity_C_or_D"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/nextActivityButtonLabel"

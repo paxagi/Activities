@@ -33,4 +33,6 @@
     <string name="favoritesLabel">Избранное</string>
     <string name="feedbackRequest">Дать обратную связь</string>
     <string name="closeLabel">Закрыть</string>
+    <string name="item_goToC">Выложить изображение</string>
+    <string name="item_goToD">Разделить экран</string>
 </resources>
