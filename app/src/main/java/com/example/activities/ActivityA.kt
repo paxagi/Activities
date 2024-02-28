@@ -12,6 +12,7 @@ import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.widget.addTextChangedListener
 
@@ -34,12 +35,79 @@ class ActivityA : AppCompatActivity() {
         city = findViewById(R.id.etCity)
         street = findViewById(R.id.etStreet)
         house = findViewById(R.id.etHouse)
-        btnApply = findViewById(R.id.btn_apply)
-        btnShowToast = findViewById(R.id.btnShowToast)
-        etSurname = findViewById(R.id.etSurname)
-        etBirthday = findViewById(R.id.editBirthday)
-        etCountry = findViewById(R.id.etCountry)
-        btnRequestPermissions = findViewById(R.id.btnRequestPermissions)
+        btnApply = findViewById<Button>(R.id.btn_apply)
+        btnShowToast = findViewById<Button>(R.id.btnShowToast)
+        etSurname = findViewById<EditText>(R.id.etSurname)
+        etBirthday = findViewById<EditText>(R.id.editBirthday)
+        etCountry = findViewById<EditText>(R.id.etCountry)
+        btnRequestPermissions = findViewById<Button>(R.id.btnRequestPermissions)
+    }
+
+    private fun hasReadExternalStoragePermission() =
+        ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED
+
+    private fun hasBackgroundLocationPermission() =
+        ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_BACKGROUND_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+
+    private fun hasCoarseLocationPermission() =
+        ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+
+    private fun hasBluetoothPermission() =
+        ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.BLUETOOTH
+        ) == PackageManager.PERMISSION_GRANTED
+
+    private fun requestPermission() {
+        val clearPurposePermissionsToRequest = mutableListOf<String>()
+        val locationPermissionSToRequest = mutableListOf<String>()
+        if (!hasReadExternalStoragePermission()) {
+            clearPurposePermissionsToRequest.add(Manifest.permission.READ_EXTERNAL_STORAGE)
+        }
+        if (!hasBackgroundLocationPermission()) {
+            locationPermissionSToRequest.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+        }
+        if (!hasCoarseLocationPermission()) {
+            locationPermissionSToRequest.add(Manifest.permission.ACCESS_COARSE_LOCATION)
+        }
+        if (!hasBluetoothPermission()) {
+            clearPurposePermissionsToRequest.add(Manifest.permission.BLUETOOTH)
+        }
+
+        if (clearPurposePermissionsToRequest.isNotEmpty()) {
+            ActivityCompat.requestPermissions(
+                this,
+                clearPurposePermissionsToRequest.toTypedArray(),
+                CLEAR_PURPOSE_PERMISSIONS_REQUESTS_CODE
+            )
+        }
+        if (locationPermissionSToRequest.isNotEmpty()) {
+            AlertDialog.Builder(this)
+                .setTitle(R.string.LocationRequestMessageTitle)
+                .setMessage(R.string.explicationOfLocationRequest)
+                .setIcon(R.drawable.ic_location_request)
+                .setPositiveButton("Allow") { _, _ ->
+                    ActivityCompat.requestPermissions(
+                        this,
+                        locationPermissionSToRequest.toTypedArray(),
+                        LOCATION_PERMISSIONS_REQUESTS_CODE
+                    )
+                }
+                .create()
+                .also { it.show() }
+        }
+        if (clearPurposePermissionsToRequest.isEmpty() && locationPermissionSToRequest.isEmpty()) {
+            Log.d("permissions", "all necessary permissions has been granted")
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -184,3 +252,5 @@ class ActivityA : AppCompatActivity() {
 }
 
 const val EXTRA_PERSON_DATA_NAME = "EXTRA_PERSON"
+const val CLEAR_PURPOSE_PERMISSIONS_REQUESTS_CODE = 0
+const val LOCATION_PERMISSIONS_REQUESTS_CODE = 1
