@@ -35,4 +35,7 @@
     <string name="closeLabel">Закрыть</string>
     <string name="item_goToC">Выложить изображение</string>
     <string name="item_goToD">Разделить экран</string>
+    <string name="hello_blank_fragment">Привет</string>
+    <string name="hello_top_fragment">Я синий 🍺</string>
+    <string name="hello_bottom_fragment">Я зеленый</string>
 </resources>
