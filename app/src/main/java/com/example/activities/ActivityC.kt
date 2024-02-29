@@ -9,12 +9,19 @@ import android.view.MenuItem
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import com.google.android.material.navigation.NavigationBarView
 
 class ActivityC : AppCompatActivity() {
     private lateinit var editDescription: EditText
     private lateinit var ivPhoto: ImageView
     private lateinit var btnTakePhotoOrPDF: Button
     private lateinit var statusOfSelectedResource: TextView
+    private lateinit var bottomNavigationView: NavigationBarView
+    private val homeFragment = HomeFragment()
+    private val defaultFirstFragment: Fragment = homeFragment
+    val messagesFragment by lazy { MessagesFragment() }
+    val profileFragment by lazy { ProfileFragment() }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("lifecycle", "onCreate: C")
@@ -25,6 +32,7 @@ class ActivityC : AppCompatActivity() {
         ivPhoto = findViewById<ImageView>(R.id.ivPhotoOrPDF)
         btnTakePhotoOrPDF = findViewById<Button>(R.id.btnTakePhotoOrPDF)
         statusOfSelectedResource = findViewById<TextView>(R.id.statusOfSelectedResource)
+        bottomNavigationView = findViewById(R.id.bottomNavigationView)
 
         editDescription.setText(message)
         setResult(RESULT_OK, intent.putExtra("back msg", "back to C"))
@@ -37,6 +45,23 @@ class ActivityC : AppCompatActivity() {
                 it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
                 startActivityForResult(it, 0)
             }
+        }
+
+        setCurrentFragment(defaultFirstFragment)
+        bottomNavigationView.setOnItemSelectedListener {
+            setCurrentFragment(
+                when(it.itemId) {
+                    R.id.miHome -> homeFragment
+                    R.id.miMessages -> messagesFragment
+                    R.id.miProfile -> profileFragment
+                    else -> defaultFirstFragment
+                }
+            )
+            return@setOnItemSelectedListener true
+        }
+        bottomNavigationView.getOrCreateBadge(R.id.miMessages).apply {
+            number = 0
+            isVisible = true
         }
     }
 
@@ -94,4 +119,9 @@ class ActivityC : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean = MenuListener().create(this, menu)
     override fun onOptionsItemSelected(item: MenuItem): Boolean = MenuListener().itemSelected(this, item)
 
+    private fun setCurrentFragment(fragment: Fragment) =
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.flFragment, fragment)
+            commit()
+        }
 }

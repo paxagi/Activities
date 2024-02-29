@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/standard_padding"
     tools:context=".ActivityC">
 
     <TextView
@@ -66,7 +65,7 @@
         android:id="@+id/cbCheese"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:theme="@style/SelectableGreen"
+        android:theme="@style/SelectableBlue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rgMeat"
         android:text="@string/cbCheeseLabel" />
@@ -75,7 +74,7 @@
         android:id="@+id/cbOnion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:theme="@style/SelectableGreen"
+        android:theme="@style/SelectablePink"
         app:layout_constraintStart_toEndOf="@id/cbCheese"
         app:layout_constraintTop_toTopOf="@id/cbCheese"
         android:text="@string/cbOnionLabel" />
@@ -88,6 +87,23 @@
         app:layout_constraintStart_toEndOf="@id/cbOnion"
         app:layout_constraintTop_toTopOf="@id/cbOnion"
         android:text="@string/cbSaladLabel" />
+
+    <FrameLayout
+        android:id="@+id/flFragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/constraint_match_parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cbSalad" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_nav_menu"
+        tools:layout_editor_absoluteX="16dp" />
 
     <TextView
         android:id="@+id/statusOfSelectedResource"
@@ -114,9 +130,8 @@
         android:id="@+id/btnTakePhotoOrPDF"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/constraint_match_parent"
-        android:layout_marginBottom="@dimen/standard_padding"
         android:text="@string/button"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/spinner"
@@ -128,8 +143,7 @@
         android:layout_height="@dimen/constraint_match_parent"
         android:layout_marginEnd="@dimen/standard_padding"
         android:layout_marginRight="@dimen/standard_padding"
-        android:layout_marginBottom="@dimen/standard_padding"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toStartOf="@+id/btnTakePhotoOrPDF"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -140,13 +154,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85" />
+        app:layout_constraintGuide_percent="0.8" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.38" />
+        app:layout_constraintGuide_percent="0.55" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

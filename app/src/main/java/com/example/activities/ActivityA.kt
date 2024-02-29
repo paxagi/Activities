@@ -235,52 +235,6 @@ class ActivityA : AppCompatActivity() {
             }
         }
     }
-
-    private fun hasReadExternalStoragePermission() =
-        ActivityCompat.checkSelfPermission(
-            this,
-            Manifest.permission.READ_EXTERNAL_STORAGE
-        ) == PackageManager.PERMISSION_GRANTED
-
-    private fun hasBackgroundLocationPermission() =
-        ActivityCompat.checkSelfPermission(
-            this,
-            Manifest.permission.ACCESS_BACKGROUND_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
-
-    private fun hasCoarseLocationPermission() =
-        ActivityCompat.checkSelfPermission(
-            this,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
-
-    private fun hasBluetoothPermission() =
-        ActivityCompat.checkSelfPermission(
-            this,
-            Manifest.permission.BLUETOOTH
-        ) == PackageManager.PERMISSION_GRANTED
-
-    private fun requestPermission() {
-        val permissionsToRequest = mutableListOf<String>()
-        if (!hasReadExternalStoragePermission()) {
-            permissionsToRequest.add(Manifest.permission.READ_EXTERNAL_STORAGE)
-        }
-        if (!hasBackgroundLocationPermission()) {
-            permissionsToRequest.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
-        }
-        if (!hasCoarseLocationPermission()) {
-            permissionsToRequest.add(Manifest.permission.ACCESS_COARSE_LOCATION)
-        }
-        if (!hasBluetoothPermission()) {
-            permissionsToRequest.add(Manifest.permission.BLUETOOTH)
-        }
-
-        if (permissionsToRequest.isNotEmpty()) {
-            ActivityCompat.requestPermissions(this, permissionsToRequest.toTypedArray(), 0)
-        } else {
-            Log.d("permissions", "all necessary permissions has been granted")
-        }
-    }
 }
 
 const val EXTRA_PERSON_DATA_NAME = "EXTRA_PERSON"

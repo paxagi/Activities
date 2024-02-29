@@ -33,4 +33,10 @@
     <string name="favoritesLabel">Favorites</string>
     <string name="feedbackRequest">Give Feedback</string>
     <string name="closeLabel">Close</string>
+    <string name="bottom_menu_home_label">Home</string>
+    <string name="bottom_menu_messages_label">Messages</string>
+    <string name="bottom_menu_profile_label">Profile</string>
+    <string name="sweetHomeLabel">Home, sweet home.</string>
+    <string name="noMessagesLabel">just empty</string>
+    <string name="profileLabel">not OK, mb VK</string>
 </resources>
