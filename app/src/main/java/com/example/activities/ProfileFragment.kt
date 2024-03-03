@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 /**
  * A simple [Fragment] subclass.
@@ -14,14 +17,43 @@ import android.view.ViewGroup
  */
 class ProfileFragment() : Fragment() {
     private var images: ArrayList<Int>? = null
-
+    private var stop: (() -> Unit)? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val viewPagerOfImages: ViewPager2 =
             view.findViewById(R.id.viewPagerOfImages)
         val adapter = ViewPagerAdapter(images ?: arrayListOf(R.drawable.empty,))
+        val tlTopImageSwitcher: TabLayout = view.findViewById(R.id.tlTopImageSwitcher)
+
         viewPagerOfImages.adapter = adapter
+
+        createTabLayout(tlTopImageSwitcher, viewPagerOfImages)
+    }
+
+    private fun createTabLayout(tabLayout: TabLayout, viewPager2: ViewPager2) {
+
+        TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
+            tab.text = "Tab ${position+1}"
+        }.attach()
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                Toast.makeText(
+                    this@ProfileFragment.context,
+                    tab?.position?.let { n -> "Image №${n+1}" } ?: "Image not found",
+                    Toast.LENGTH_SHORT
+                ).apply {
+                    stop = this::cancel
+                    show()
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                stop?.run { invoke() }
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+        })
     }
 
     override fun onCreateView(

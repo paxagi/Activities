@@ -92,7 +92,7 @@
         android:id="@+id/flFragment"
         android:layout_width="match_parent"
         android:layout_height="@dimen/constraint_match_parent"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintBottom_toTopOf="@+id/flTopOfFooter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cbSalad" />
@@ -110,21 +110,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/empty_text"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/ivPhotoOrPDF"
+        app:layout_constraintEnd_toEndOf="@+id/ivPhotoOrPDF"
+        app:layout_constraintStart_toStartOf="@+id/ivPhotoOrPDF"
+        app:layout_constraintTop_toTopOf="@+id/ivPhotoOrPDF" />
 
     <ImageView
         android:id="@+id/ivPhotoOrPDF"
         android:layout_width="@dimen/constraint_match_parent"
         android:layout_height="@dimen/constraint_match_parent"
-        android:layout_marginTop="@dimen/standard_padding"
-        android:layout_marginBottom="@dimen/standard_padding"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintBottom_toBottomOf="@+id/cbSalad"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline6"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        app:layout_constraintStart_toEndOf="@+id/rgMeat"
+        app:layout_constraintTop_toBottomOf="@+id/edit_description"
+        tools:srcCompat="@drawable/img4" />
 
     <Button
         android:id="@+id/btnTakePhotoOrPDF"
@@ -135,7 +135,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/spinner"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+        app:layout_constraintTop_toTopOf="@+id/flTopOfFooter" />
 
     <Spinner
         android:id="@+id/spinner"
@@ -147,20 +147,13 @@
         app:layout_constraintEnd_toStartOf="@+id/btnTakePhotoOrPDF"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+        app:layout_constraintTop_toTopOf="@+id/flTopOfFooter" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
+        android:id="@+id/flTopOfFooter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.8" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.55" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
