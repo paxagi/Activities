@@ -52,73 +52,6 @@ class ActivityA : AppCompatActivity() {
         difficultLevels = resources.getStringArray(R.array.difficultLevels).toList()
     }
 
-    private fun hasReadExternalStoragePermission() =
-        ActivityCompat.checkSelfPermission(
-            this,
-            Manifest.permission.READ_EXTERNAL_STORAGE
-        ) == PackageManager.PERMISSION_GRANTED
-
-    private fun hasBackgroundLocationPermission() =
-        ActivityCompat.checkSelfPermission(
-            this,
-            Manifest.permission.ACCESS_BACKGROUND_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
-
-    private fun hasCoarseLocationPermission() =
-        ActivityCompat.checkSelfPermission(
-            this,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
-
-    private fun hasBluetoothPermission() =
-        ActivityCompat.checkSelfPermission(
-            this,
-            Manifest.permission.BLUETOOTH
-        ) == PackageManager.PERMISSION_GRANTED
-
-    private fun requestPermission() {
-        val clearPurposePermissionsToRequest = mutableListOf<String>()
-        val locationPermissionSToRequest = mutableListOf<String>()
-        if (!hasReadExternalStoragePermission()) {
-            clearPurposePermissionsToRequest.add(Manifest.permission.READ_EXTERNAL_STORAGE)
-        }
-        if (!hasBackgroundLocationPermission()) {
-            locationPermissionSToRequest.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
-        }
-        if (!hasCoarseLocationPermission()) {
-            locationPermissionSToRequest.add(Manifest.permission.ACCESS_COARSE_LOCATION)
-        }
-        if (!hasBluetoothPermission()) {
-            clearPurposePermissionsToRequest.add(Manifest.permission.BLUETOOTH)
-        }
-
-        if (clearPurposePermissionsToRequest.isNotEmpty()) {
-            ActivityCompat.requestPermissions(
-                this,
-                clearPurposePermissionsToRequest.toTypedArray(),
-                CLEAR_PURPOSE_PERMISSIONS_REQUESTS_CODE
-            )
-        }
-        if (locationPermissionSToRequest.isNotEmpty()) {
-            AlertDialog.Builder(this)
-                .setTitle(R.string.LocationRequestMessageTitle)
-                .setMessage(R.string.explicationOfLocationRequest)
-                .setIcon(R.drawable.ic_location_request)
-                .setPositiveButton("Allow") { _, _ ->
-                    ActivityCompat.requestPermissions(
-                        this,
-                        locationPermissionSToRequest.toTypedArray(),
-                        LOCATION_PERMISSIONS_REQUESTS_CODE
-                    )
-                }
-                .create()
-                .also { it.show() }
-        }
-        if (clearPurposePermissionsToRequest.isEmpty() && locationPermissionSToRequest.isEmpty()) {
-            Log.d("permissions", "all necessary permissions has been granted")
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("lifecycle", "onCreate: A")
@@ -261,27 +194,47 @@ class ActivityA : AppCompatActivity() {
         ) == PackageManager.PERMISSION_GRANTED
 
     private fun requestPermission() {
-        val permissionsToRequest = mutableListOf<String>()
+        val clearPurposePermissionsToRequest = mutableListOf<String>()
+        val locationPermissionSToRequest = mutableListOf<String>()
         if (!hasReadExternalStoragePermission()) {
-            permissionsToRequest.add(Manifest.permission.READ_EXTERNAL_STORAGE)
+            clearPurposePermissionsToRequest.add(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
         if (!hasBackgroundLocationPermission()) {
-            permissionsToRequest.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+            locationPermissionSToRequest.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
         }
         if (!hasCoarseLocationPermission()) {
-            permissionsToRequest.add(Manifest.permission.ACCESS_COARSE_LOCATION)
+            locationPermissionSToRequest.add(Manifest.permission.ACCESS_COARSE_LOCATION)
         }
         if (!hasBluetoothPermission()) {
-            permissionsToRequest.add(Manifest.permission.BLUETOOTH)
+            clearPurposePermissionsToRequest.add(Manifest.permission.BLUETOOTH)
         }
 
-        if (permissionsToRequest.isNotEmpty()) {
-            ActivityCompat.requestPermissions(this, permissionsToRequest.toTypedArray(), 0)
-        } else {
+        if (clearPurposePermissionsToRequest.isNotEmpty()) {
+            ActivityCompat.requestPermissions(
+                this,
+                clearPurposePermissionsToRequest.toTypedArray(),
+                CLEAR_PURPOSE_PERMISSIONS_REQUESTS_CODE
+            )
+        }
+        if (locationPermissionSToRequest.isNotEmpty()) {
+            AlertDialog.Builder(this)
+                .setTitle(R.string.LocationRequestMessageTitle)
+                .setMessage(R.string.explicationOfLocationRequest)
+                .setIcon(R.drawable.ic_location_request)
+                .setPositiveButton("Allow") { _, _ ->
+                    ActivityCompat.requestPermissions(
+                        this,
+                        locationPermissionSToRequest.toTypedArray(),
+                        LOCATION_PERMISSIONS_REQUESTS_CODE
+                    )
+                }
+                .create()
+                .also { it.show() }
+        }
+        if (clearPurposePermissionsToRequest.isEmpty() && locationPermissionSToRequest.isEmpty()) {
             Log.d("permissions", "all necessary permissions has been granted")
         }
-    }
-}
+    }}
 
 const val EXTRA_PERSON_DATA_NAME = "EXTRA_PERSON"
 const val CLEAR_PURPOSE_PERMISSIONS_REQUESTS_CODE = 0
