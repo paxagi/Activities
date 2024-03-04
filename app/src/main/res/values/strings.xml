@@ -33,4 +33,9 @@
     <string name="favoritesLabel">Favorites</string>
     <string name="feedbackRequest">Give Feedback</string>
     <string name="closeLabel">Close</string>
+    <string name="my_activities_label">My Activities</string>
+    <string name="openLabel">Open</string>
+    <string name="activity_a_title">Activity A</string>
+    <string name="activity_b_title">Activity B</string>
+    <string name="activity_c_title">Activity C</string>
 </resources>

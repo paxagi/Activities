@@ -51,11 +51,12 @@ class ActivityB : AppCompatActivity() {
         setContentView(R.layout.activity_b)
         initViews()
 
-        val person = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableExtra(EXTRA_PERSON_DATA_NAME, Person::class.java)!! as Person
+        val person: Person = (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(EXTRA_PERSON_DATA_NAME, Person::class.java)
         } else {
-            intent.getParcelableExtra<Person>(EXTRA_PERSON_DATA_NAME) as Person
-        }
+            intent.getParcelableExtra(EXTRA_PERSON_DATA_NAME)
+        }) ?: Person("", "", "", "")
+
         textView1.also {
             it.text = "${getString(R.string.tvPersonLabel)} ${person.name}"
         }
