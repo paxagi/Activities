@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,16 +25,18 @@ class ActivityB : AppCompatActivity() {
     private lateinit var textView3: TextView
     private lateinit var textView4: TextView
     private lateinit var textView5: TextView
+    lateinit var spSelectNextActivity: Spinner
     private lateinit var rvInterests: RecyclerView
 
     private fun initViews() {
         editDescription = findViewById<EditText>(R.id.editTextTextB)
-        btnNextActivity = findViewById<Button>(R.id.bnt_go_to_activityC)
+        btnNextActivity = findViewById<Button>(R.id.bnt_go_to_activity_C_or_D)
         textView1 = findViewById(R.id.textView1)
         textView2 = findViewById(R.id.textView2)
         textView3 = findViewById(R.id.textView3)
         textView4 = findViewById(R.id.textView4)
         textView5 = findViewById(R.id.textView5)
+        spSelectNextActivity = findViewById(R.id.targetActivity)
         rvInterests = findViewById(R.id.rvInterests)
     }
 
@@ -65,14 +68,24 @@ class ActivityB : AppCompatActivity() {
         textView3.setOnClickListener { showToastAndLogD(it) }
         textView4.setOnClickListener { showToastAndLogD(it) }
         textView5.setOnClickListener { showToastAndLogD(it) }
+        val goToC = getString(R.string.item_goToC)
+        val goToD = getString(R.string.item_goToD)
 
 
         btnNextActivity.setOnClickListener{
-            startActivityForResult(
-                Intent(this, ActivityC::class.java)
-                    .putExtra("msg", "open C"),
-                0
-            )
+            val selectedItem = spSelectNextActivity.selectedItem
+            when (selectedItem){
+                goToC ->
+                    startActivityForResult(
+                        Intent(this, ActivityC::class.java)
+                            .putExtra("msg", "open C"),
+                        0
+                    )
+                goToD ->
+                    startActivity(
+                        Intent(this, ActivityD::class.java)
+                    )
+            }
         }
 
         var interestsList = mutableListOf(

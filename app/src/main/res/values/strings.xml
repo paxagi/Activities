@@ -33,4 +33,9 @@
     <string name="favoritesLabel">Favorites</string>
     <string name="feedbackRequest">Give Feedback</string>
     <string name="closeLabel">Close</string>
+    <string name="item_goToC">to upload Image</string>
+    <string name="item_goToD">to separate screen</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_top_fragment">I\'m blue</string>
+    <string name="hello_bottom_fragment">I\'m green ♻</string>
 </resources>
