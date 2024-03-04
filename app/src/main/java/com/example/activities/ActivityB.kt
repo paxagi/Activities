@@ -12,18 +12,21 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class ActivityB : AppCompatActivity() {
 
     private lateinit var editDescription: EditText
     private lateinit var btnNextActivity: Button
 
-    lateinit var textView1: TextView
-    lateinit var textView2: TextView
-    lateinit var textView3: TextView
-    lateinit var textView4: TextView
-    lateinit var textView5: TextView
+    private lateinit var textView1: TextView
+    private lateinit var textView2: TextView
+    private lateinit var textView3: TextView
+    private lateinit var textView4: TextView
+    private lateinit var textView5: TextView
     lateinit var spSelectNextActivity: Spinner
+    private lateinit var rvInterests: RecyclerView
 
     private fun initViews() {
         editDescription = findViewById<EditText>(R.id.editTextTextB)
@@ -34,6 +37,7 @@ class ActivityB : AppCompatActivity() {
         textView4 = findViewById(R.id.textView4)
         textView5 = findViewById(R.id.textView5)
         spSelectNextActivity = findViewById(R.id.targetActivity)
+        rvInterests = findViewById(R.id.rvInterests)
     }
 
     private fun showToastAndLogD(
@@ -84,6 +88,35 @@ class ActivityB : AppCompatActivity() {
             }
         }
 
+        var interestsList = mutableListOf(
+            Interest(R.drawable.avatar, "Android"),
+            Interest(R.drawable.avatar, "Kotlin"),
+            Interest(R.drawable.avatar, "Poker"),
+            Interest(R.drawable.avatar, "Sugar"),
+            Interest(R.drawable.avatar, "Milk"),
+            Interest(R.drawable.avatar, "Dart"),
+            Interest(R.drawable.avatar, "Football"),
+            Interest(R.drawable.avatar, "Volleyball"),
+            Interest(R.drawable.avatar, "Video"),
+            Interest(R.drawable.avatar, "Photo"),
+            Interest(R.drawable.avatar, "Walking"),
+            Interest(R.drawable.avatar, "Games"),
+            Interest(R.drawable.avatar, "Movies"),
+            Interest(R.drawable.avatar, "Moves"),
+            Interest(R.drawable.avatar, "JS"),
+            Interest(R.drawable.avatar, "Phone"),
+            Interest(R.drawable.avatar, "Sleeping"),
+            Interest(R.drawable.avatar, "Literature"),
+            Interest(R.drawable.avatar, "Math"),
+            Interest(R.drawable.avatar, "Tricks"),
+            Interest(R.drawable.avatar, "Hints"),
+        )
+
+        val adapter = InterestsAdapter(interestsList)
+        rvInterests.apply {
+            this.adapter = adapter
+            this.layoutManager = LinearLayoutManager(this@ActivityB)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
