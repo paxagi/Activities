@@ -21,7 +21,7 @@ class ActivityC : AppCompatActivity() {
     private val homeFragment = HomeFragment()
     private val defaultFirstFragment: Fragment = homeFragment
     val messagesFragment by lazy { MessagesFragment() }
-    val profileFragment by lazy { ProfileFragment() }
+    private lateinit var profileFragment : ProfileFragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("lifecycle", "onCreate: C")
@@ -63,6 +63,14 @@ class ActivityC : AppCompatActivity() {
             number = 0
             isVisible = true
         }
+
+        val images = arrayListOf<Int>(
+            R.drawable.img1,
+            R.drawable.img2,
+            R.drawable.img3,
+            R.drawable.img4,
+        )
+        profileFragment = ProfileFragment.newInstance(images)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -121,6 +129,7 @@ class ActivityC : AppCompatActivity() {
 
     private fun setCurrentFragment(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {
+            remove(fragment)
             replace(R.id.flFragment, fragment)
             commit()
         }
