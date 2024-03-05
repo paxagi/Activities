@@ -9,7 +9,7 @@ import android.view.ViewGroup
 
 /**
  * A simple [Fragment] subclass.
- * Use the [BlankFragment.newInstance] factory method to
+ * Use the [ProfileFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
 class ProfileFragment() : Fragment() {
