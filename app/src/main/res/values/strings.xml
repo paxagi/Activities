@@ -38,4 +38,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_top_fragment">I\'m blue</string>
     <string name="hello_bottom_fragment">I\'m green ♻</string>
+    <string name="saveAnyDataLabelCAPS">SAVE</string>
+    <string name="loadAnyDataLabel">Load</string>
 </resources>

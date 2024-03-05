@@ -38,4 +38,6 @@
     <string name="hello_blank_fragment">Привет</string>
     <string name="hello_top_fragment">Я синий 🍺</string>
     <string name="hello_bottom_fragment">Я зеленый</string>
+    <string name="saveAnyDataLabelCAPS">СОХРАНИТЬ</string>
+    <string name="loadAnyDataLabel">Загрузить</string>
 </resources>

@@ -136,4 +136,23 @@
         android:text="@string/btnRequestPermissionsLabel"
         android:id="@+id/btnRequestPermissions" />
 
+    <LinearLayout
+        style="?attr/buttonBarButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btnSavePersonData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/saveAnyDataLabelCAPS" />
+
+        <Button
+            android:id="@+id/btnLoadPersonData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loadAnyDataLabel" />
+    </LinearLayout>
+
 </LinearLayout>
