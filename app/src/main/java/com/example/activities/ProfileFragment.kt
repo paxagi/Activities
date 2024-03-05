@@ -16,14 +16,6 @@ class ProfileFragment() : Fragment() {
     private var images: ArrayList<Int>? = null
 
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val viewPagerOfImages: ViewPager2 =
-            view.findViewById(R.id.viewPagerOfImages)
-        val adapter = ViewPagerAdapter(images ?: arrayListOf(R.drawable.empty,))
-        viewPagerOfImages.adapter = adapter
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,6 +23,13 @@ class ProfileFragment() : Fragment() {
         images = arguments?.obtainProfileFragmentState()?.images
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val viewPagerOfImages: ViewPager2 =
+            view.findViewById(R.id.viewPagerOfImages)
+        val adapter = ViewPagerAdapter(images ?: arrayListOf(R.drawable.empty,))
+        viewPagerOfImages.adapter = adapter
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
