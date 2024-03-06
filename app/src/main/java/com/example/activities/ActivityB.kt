@@ -1,6 +1,8 @@
 package com.example.activities
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,6 +14,7 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -135,6 +138,15 @@ class ActivityB : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         Log.d("lifecycle", "onResume: B")
+        if (activeActivity == this::class) {
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) == PackageManager.PERMISSION_GRANTED) {
+                notifications.apply { notificationManager.notify(0, wakeUp) }
+            }
+        }
+        activeActivity = this::class
     }
 
     override fun onPause() {
@@ -145,6 +157,14 @@ class ActivityB : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         Log.d("lifecycle", "onStop: B")
+        if (activeActivity == this::class) {
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) == PackageManager.PERMISSION_GRANTED) {
+                notifications.apply { notificationManager.notify(0, sleep) }
+            }
+        }
     }
 
     override fun onRestart() {

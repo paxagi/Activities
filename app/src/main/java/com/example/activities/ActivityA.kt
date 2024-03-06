@@ -20,6 +20,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.widget.addTextChangedListener
+import kotlin.reflect.KClass
 
 class ActivityA : AppCompatActivity() {
     private lateinit var etName: EditText
@@ -119,6 +120,8 @@ class ActivityA : AppCompatActivity() {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
+
+        notifications = Notifications(this)
     }
 
     override fun onStart() {
@@ -129,6 +132,15 @@ class ActivityA : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         Log.d("lifecycle", "onResume: A")
+        if (activeActivity == this::class) {
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) == PackageManager.PERMISSION_GRANTED) {
+                notifications.apply { notificationManager.notify(0, wakeUp) }
+            }
+        }
+        activeActivity = this::class
     }
 
     override fun onPause() {
@@ -139,6 +151,14 @@ class ActivityA : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         Log.d("lifecycle", "onStop: A")
+        if (activeActivity == this::class) {
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED) {
+                notifications.apply { notificationManager.notify(0, sleep) }
+            }
+        }
     }
 
     override fun onRestart() {
@@ -235,6 +255,9 @@ class ActivityA : AppCompatActivity() {
             Log.d("permissions", "all necessary permissions has been granted")
         }
     }}
+
+var activeActivity: KClass<out AppCompatActivity>? = null
+lateinit var notifications: Notifications
 
 const val EXTRA_PERSON_DATA_NAME = "EXTRA_PERSON"
 const val CLEAR_PURPOSE_PERMISSIONS_REQUESTS_CODE = 0
