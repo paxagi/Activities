@@ -7,13 +7,22 @@
     android:orientation="vertical"
     tools:context=".ActivityA">
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tlTopImageSwitcher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/DeepPink"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPagerOfImages"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/constraint_match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tlTopImageSwitcher" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
