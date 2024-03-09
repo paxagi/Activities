@@ -22,10 +22,8 @@ class MyIntentService: IntentService("MyIntentService") {
     override fun onHandleIntent(intent: Intent?) {
         try {
             isRunning = true
-
-                Log.d("MyIntentService", "Service is running...")
-                Thread.sleep(3000)
-
+            Log.d("MyIntentService", "Service is running...")
+            Thread.sleep(3000)
         } catch (e: InterruptedException) {
             Thread.currentThread().interrupt()
         }
