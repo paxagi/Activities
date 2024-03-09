@@ -1,16 +1,19 @@
 package com.example.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.view.MenuItem
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationBarView
+
 
 class ActivityC : AppCompatActivity() {
     private lateinit var editDescription: EditText
@@ -18,10 +21,6 @@ class ActivityC : AppCompatActivity() {
     private lateinit var btnTakePhotoOrPDF: Button
     private lateinit var statusOfSelectedResource: TextView
     private lateinit var bottomNavigationView: NavigationBarView
-    private val homeFragment = HomeFragment()
-    private val defaultFirstFragment: Fragment = homeFragment
-    val messagesFragment by lazy { MessagesFragment() }
-    private lateinit var profileFragment : ProfileFragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("lifecycle", "onCreate: C")
@@ -47,30 +46,29 @@ class ActivityC : AppCompatActivity() {
             }
         }
 
-        setCurrentFragment(defaultFirstFragment)
-        bottomNavigationView.setOnItemSelectedListener {
-            setCurrentFragment(
-                when(it.itemId) {
-                    R.id.miHome -> homeFragment
-                    R.id.miMessages -> messagesFragment
-                    R.id.miProfile -> profileFragment
-                    else -> defaultFirstFragment
-                }
-            )
-            return@setOnItemSelectedListener true
-        }
-        bottomNavigationView.getOrCreateBadge(R.id.miMessages).apply {
-            number = 0
-            isVisible = true
-        }
-
         val images = arrayListOf<Int>(
             R.drawable.img1,
             R.drawable.img2,
             R.drawable.img3,
             R.drawable.img4,
         )
-        profileFragment = ProfileFragment.newInstance(images)
+
+        changeFragment(HomeFragment(), "home")
+        bottomNavigationView.setOnItemSelectedListener {
+            when(it.itemId) {
+                R.id.miHome -> changeFragment(HomeFragment(), "home")
+                R.id.miMessages -> changeFragment(MessagesFragment(), "message")
+                R.id.miProfile -> changeFragment(
+                    ProfileFragment.newInstance(images),
+                    "profile"
+                )
+            }
+            return@setOnItemSelectedListener true
+        }
+        bottomNavigationView.getOrCreateBadge(R.id.miMessages).apply {
+            number = 0
+            isVisible = true
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -127,10 +125,24 @@ class ActivityC : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean = MenuListener().create(this, menu)
     override fun onOptionsItemSelected(item: MenuItem): Boolean = MenuListener().itemSelected(this, item)
 
-    private fun setCurrentFragment(fragment: Fragment) =
-        supportFragmentManager.beginTransaction().apply {
-            remove(fragment)
-            replace(R.id.flFragment, fragment)
-            commit()
+    private fun changeFragment(fragment: Fragment, tagFragmentName: String) {
+        var currentFragment: Fragment?
+        var fragmentTemp: Fragment?
+        supportFragmentManager.apply {
+            currentFragment = primaryNavigationFragment
+            fragmentTemp = findFragmentByTag(tagFragmentName)
+        }.beginTransaction().apply {
+            currentFragment?.let { hide(it) }
+            if (fragmentTemp == null) {
+                fragmentTemp = fragment
+                add(R.id.flFragment, fragmentTemp!!, tagFragmentName)
+            } else {
+                show(fragmentTemp!!)
+            }
+
+            setPrimaryNavigationFragment(fragmentTemp)
+            setReorderingAllowed(true)
+            commitNowAllowingStateLoss()
         }
+    }
 }
