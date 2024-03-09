@@ -35,6 +35,8 @@ class ActivityA : AppCompatActivity() {
     private lateinit var btnRequestPermissions: Button
     private lateinit var spDifficultLevels: Spinner
     private lateinit var difficultLevels: List<String>
+    private lateinit var btnSavePersonData: Button
+    private lateinit var btnLoadPersonData: Button
 
     private fun initViews() {
         etName = findViewById(R.id.first_name)
@@ -50,6 +52,8 @@ class ActivityA : AppCompatActivity() {
         btnRequestPermissions = findViewById<Button>(R.id.btnRequestPermissions)
         spDifficultLevels = findViewById(R.id.spDifficultLevels)
         difficultLevels = resources.getStringArray(R.array.difficultLevels).toList()
+        btnSavePersonData = findViewById(R.id.btnSavePersonData)
+        btnLoadPersonData = findViewById(R.id.btnLoadPersonData)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -118,6 +122,34 @@ class ActivityA : AppCompatActivity() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
+        val sharedPreferences = getSharedPreferences("myPref", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        btnSavePersonData.setOnClickListener {
+            val name = etName.text.toString()
+            val surname = etSurname.text.toString()
+            val birthday = etBirthday.text.toString()
+            val country = etCountry.text.toString()
+
+            editor.apply {
+                putString("name", name)
+                putString("surname", surname)
+                putString("birthday", birthday)
+                putString("country", country)
+                apply()
+            }
+        }
+        btnLoadPersonData.setOnClickListener {
+            val name = sharedPreferences.getString("name", "")
+            val surname = sharedPreferences.getString("surname", "")
+            val birthday = sharedPreferences.getString("birthday", "")
+            val country = sharedPreferences.getString("country", "India")
+
+            etName.setText(name)
+            etSurname.setText(surname)
+            etBirthday.setText(birthday)
+            etCountry.setText(country)
         }
     }
 
