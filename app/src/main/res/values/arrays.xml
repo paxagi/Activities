@@ -5,4 +5,8 @@
         <item>Medium</item>
         <item>Hard</item>
     </string-array>
+    <string-array name="activityForkFromActivityB">
+        <item id="goToC">@string/item_goToC</item>
+        <item id="goToD">@string/item_goToD</item>
+    </string-array>
 </resources>

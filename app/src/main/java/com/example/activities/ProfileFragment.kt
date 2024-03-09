@@ -12,7 +12,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 /**
  * A simple [Fragment] subclass.
- * Use the [BlankFragment.newInstance] factory method to
+ * Use the [ProfileFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
 class ProfileFragment() : Fragment() {
@@ -29,6 +29,25 @@ class ProfileFragment() : Fragment() {
         viewPagerOfImages.adapter = adapter
 
         createTabLayout(tlTopImageSwitcher, viewPagerOfImages)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        images = arguments?.obtainProfileFragmentState()?.images
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_profile, container, false)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.saveProfileFragmentState(images)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        images = savedInstanceState?.obtainProfileFragmentState()?.images
     }
 
     private fun createTabLayout(tabLayout: TabLayout, viewPager2: ViewPager2) {
@@ -54,25 +73,6 @@ class ProfileFragment() : Fragment() {
 
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        images = arguments?.obtainProfileFragmentState()?.images
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.saveProfileFragmentState(images)
-    }
-
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        images = savedInstanceState?.obtainProfileFragmentState()?.images
     }
 
     companion object {

@@ -138,7 +138,7 @@
         app:layout_constraintTop_toTopOf="@+id/flTopOfFooter" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/targetActivity"
         android:layout_width="@dimen/constraint_match_parent"
         android:layout_height="@dimen/constraint_match_parent"
         android:layout_marginEnd="@dimen/standard_padding"

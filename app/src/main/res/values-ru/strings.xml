@@ -39,4 +39,9 @@
     <string name="sweetHomeLabel">Дом, милый дом.</string>
     <string name="noMessagesLabel">Полковнику никто не пишет</string>
     <string name="profileLabel">Досье</string>
+    <string name="item_goToC">Выложить изображение</string>
+    <string name="item_goToD">Разделить экран</string>
+    <string name="hello_blank_fragment">Привет</string>
+    <string name="hello_top_fragment">Я синий 🍺</string>
+    <string name="hello_bottom_fragment">Я зеленый</string>
 </resources>
