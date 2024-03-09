@@ -38,4 +38,9 @@
     <string name="hello_blank_fragment">Привет</string>
     <string name="hello_top_fragment">Я синий 🍺</string>
     <string name="hello_bottom_fragment">Я зеленый</string>
+    <string name="startServiceLabel">запустить сервис</string>
+    <string name="stopServiceLabel">остановить сервис</string>
+    <string name="unknownStatus">ожидание…</string>
+    <string name="serviceRunning">сервис запущен</string>
+    <string name="serviceStopped">сервис остановлен</string>
 </resources>

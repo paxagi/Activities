@@ -38,4 +38,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_top_fragment">I\'m blue</string>
     <string name="hello_bottom_fragment">I\'m green ♻</string>
+    <string name="startServiceLabel">start service</string>
+    <string name="stopServiceLabel">stop service</string>
+    <string name="unknownStatus">waiting…</string>
+    <string name="serviceRunning">service running</string>
+    <string name="serviceStopped">service stopped</string>
 </resources>

@@ -16,6 +16,7 @@ import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -35,6 +36,9 @@ class ActivityA : AppCompatActivity() {
     private lateinit var btnRequestPermissions: Button
     private lateinit var spDifficultLevels: Spinner
     private lateinit var difficultLevels: List<String>
+    private lateinit var btnStartService: Button
+    private lateinit var btnStopService: Button
+    private lateinit var tvServiceStatus: TextView
 
     private fun initViews() {
         etName = findViewById(R.id.first_name)
@@ -50,6 +54,9 @@ class ActivityA : AppCompatActivity() {
         btnRequestPermissions = findViewById<Button>(R.id.btnRequestPermissions)
         spDifficultLevels = findViewById(R.id.spDifficultLevels)
         difficultLevels = resources.getStringArray(R.array.difficultLevels).toList()
+        btnStartService = findViewById(R.id.btnStartService)
+        btnStopService = findViewById(R.id.btnStopService)
+        tvServiceStatus = findViewById(R.id.tvServiceStatus)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -118,6 +125,20 @@ class ActivityA : AppCompatActivity() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
+        btnStartService.setOnClickListener {
+            Intent(this, MyIntentService::class.java).also {
+                startService(it)
+                tvServiceStatus.text = getString(R.string.serviceRunning)
+            }
+        }
+        MyIntentService.onStop {
+            tvServiceStatus.text = getString(R.string.serviceStopped)
+        }
+        btnStopService.setOnClickListener {
+            MyIntentService.stopService()
+            tvServiceStatus.text = getString(R.string.serviceStopped)
         }
     }
 
