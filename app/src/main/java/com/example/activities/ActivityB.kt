@@ -51,14 +51,16 @@ class ActivityB : AppCompatActivity() {
         setContentView(R.layout.activity_b)
         initViews()
 
-        val person: Person = (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        val person: Person? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra(EXTRA_PERSON_DATA_NAME, Person::class.java)
         } else {
             intent.getParcelableExtra(EXTRA_PERSON_DATA_NAME)
-        }) ?: Person("", "", "", "")
+        }
 
         textView1.also {
-            it.text = "${getString(R.string.tvPersonLabel)} ${person.name}"
+            if (person != null) {
+                it.text = "${getString(R.string.tvPersonLabel)} ${person.name}"
+            }
         }
 
         textView1.setOnClickListener { showToastAndLogD(it, person.toString()) }
