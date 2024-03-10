@@ -40,4 +40,11 @@
     <string name="hello_bottom_fragment">Я зеленый</string>
     <string name="saveAnyDataLabelCAPS">СОХРАНИТЬ</string>
     <string name="loadAnyDataLabel">Загрузить</string>
+    <string name="startServiceLabel">запустить сервис</string>
+    <string name="stopServiceLabel">остановить сервис</string>
+    <string name="unknownStatus">ожидание…</string>
+    <string name="serviceRunning">сервис запущен</string>
+    <string name="serviceStopped">сервис остановлен</string>
+    <string name="getDataLabel">получить данные</string>
+    <string name="killedServiceMessage">Сервис убит…</string>
 </resources>
