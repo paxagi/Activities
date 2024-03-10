@@ -6,4 +6,5 @@
     <dimen name="constraint_match_parent">0dp</dimen>
     <dimen name="item_interests_logo_size">64sp</dimen>
     <dimen name="titleTextSize">24sp</dimen>
+    <dimen name="standard_nav_header_size">150dp</dimen>
 </resources>

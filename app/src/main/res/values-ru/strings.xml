@@ -33,6 +33,11 @@
     <string name="favoritesLabel">Избранное</string>
     <string name="feedbackRequest">Дать обратную связь</string>
     <string name="closeLabel">Закрыть</string>
+    <string name="my_activities_label">Мои активити</string>
+    <string name="openLabel">Открыть</string>
+    <string name="activity_a_title">экран А</string>
+    <string name="activity_b_title">экран Б</string>
+    <string name="activity_c_title">экран Цэ</string>
     <string name="item_goToC">Выложить изображение</string>
     <string name="item_goToD">Разделить экран</string>
     <string name="hello_blank_fragment">Привет</string>

@@ -17,9 +17,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.widget.addTextChangedListener
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
 
 class ActivityA : AppCompatActivity() {
     private lateinit var etName: EditText
@@ -35,6 +38,9 @@ class ActivityA : AppCompatActivity() {
     private lateinit var btnRequestPermissions: Button
     private lateinit var spDifficultLevels: Spinner
     private lateinit var difficultLevels: List<String>
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var toggle: ActionBarDrawerToggle
+    private lateinit var navView: NavigationView
     private lateinit var btnSavePersonData: Button
     private lateinit var btnLoadPersonData: Button
 
@@ -52,6 +58,8 @@ class ActivityA : AppCompatActivity() {
         btnRequestPermissions = findViewById<Button>(R.id.btnRequestPermissions)
         spDifficultLevels = findViewById(R.id.spDifficultLevels)
         difficultLevels = resources.getStringArray(R.array.difficultLevels).toList()
+        drawerLayout = findViewById(R.id.drawerLayout)
+        navView = findViewById(R.id.navView)
         btnSavePersonData = findViewById(R.id.btnSavePersonData)
         btnLoadPersonData = findViewById(R.id.btnLoadPersonData)
     }
@@ -122,6 +130,23 @@ class ActivityA : AppCompatActivity() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+        }
+
+        toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.openLabel, R.string.closeLabel)
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        navView.setNavigationItemSelectedListener {
+            when(it.itemId) {
+                R.id.miA -> Intent(this, ActivityA::class.java)
+                R.id.miB -> Intent(this, ActivityB::class.java)
+                R.id.miC -> Intent(this, ActivityC::class.java)
+                else -> null
+            }?.let { activity -> startActivity(activity) }
+            true
         }
 
         val sharedPreferences = getSharedPreferences("myPref", MODE_PRIVATE)
@@ -184,7 +209,13 @@ class ActivityA : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean = MenuListener().create(this, menu)
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = MenuListener().itemSelected(this, item)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = MenuListener().let {
+        it.itemSelected(this, item)
+        if (toggle.onOptionsItemSelected(item)) {
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
