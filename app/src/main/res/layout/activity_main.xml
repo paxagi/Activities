@@ -1,140 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/standard_padding"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ActivityA">
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent"
+        android:padding="@dimen/standard_padding" >
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <EditText
+                android:id="@+id/first_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:autofillHints="Mike"
+                android:hint="@string/first_name"
+                android:inputType="textPersonName"
+                android:textSize="?attr/minTouchTargetSize" />
+
+            <EditText
+                android:id="@+id/etSurname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/last_name"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:textSize="?attr/minTouchTargetSize" />
+        </LinearLayout>
 
         <EditText
-            android:id="@+id/first_name"
-            android:layout_width="wrap_content"
+            android:id="@+id/editBirthday"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:autofillHints="Mike"
-            android:hint="@string/first_name"
-            android:inputType="textPersonName"
-            android:textSize="?attr/minTouchTargetSize" />
-
-        <EditText
-            android:id="@+id/etSurname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="@string/last_name"
+            android:hint="@string/birth_date"
+            android:inputType="date"
             android:importantForAutofill="no"
-            android:inputType="textPersonName"
             android:textSize="?attr/minTouchTargetSize" />
-    </LinearLayout>
 
-    <EditText
-        android:id="@+id/editBirthday"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/birth_date"
-        android:inputType="date"
-        android:importantForAutofill="no"
-        android:textSize="?attr/minTouchTargetSize" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <EditText
-            android:inputType="text"
-            android:id="@+id/etCity"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:hint="@string/etCityLabel"
-            android:background="#1122cc"
-            android:ems="10" />
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/etStreet"
+            <EditText
+                android:inputType="text"
+                android:id="@+id/etCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:hint="@string/etCityLabel"
+                android:background="#1122cc"
+                android:ems="10" />
+
+            <EditText
+                android:id="@+id/etStreet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:background="#119911"
+                android:ems="10"
+                android:inputType="text"
+                android:hint="@string/etStreetLabel" />
+
+            <EditText
+                android:id="@+id/etHouse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:background="#995533"
+                android:ems="10"
+                android:inputType="text"
+                android:hint="@string/etHouseLabel" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:background="#119911"
-            android:ems="10"
-            android:inputType="text"
-            android:hint="@string/etStreetLabel" />
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/etHouse"
+            <EditText
+                android:id="@+id/etCountry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:hint="@string/country"
+                android:importantForAutofill="no"
+                android:inputType="textPostalAddress"
+                android:textSize="?attr/minTouchTargetSize" />
+
+            <Button
+                android:id="@+id/btn_apply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/apply"
+                android:textSize="?attr/minTouchTargetSize" />
+
+        </LinearLayout>
+
+        <Spinner
+            android:id="@+id/spDifficultLevels"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:background="#995533"
-            android:ems="10"
-            android:inputType="text"
-            android:hint="@string/etHouseLabel" />
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/bnt_go_to_activityB"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/nextActivityButtonLabel"
+                android:textSize="?attr/minTouchTargetSize" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/etCountry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:hint="@string/country"
-            android:importantForAutofill="no"
-            android:inputType="textPostalAddress"
-            android:textSize="?attr/minTouchTargetSize" />
+        </LinearLayout>
 
         <Button
-            android:id="@+id/btn_apply"
+            android:id="@+id/btnShowToast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/apply"
-            android:textSize="?attr/minTouchTargetSize" />
-
-    </LinearLayout>
-
-    <Spinner
-        android:id="@+id/spDifficultLevels"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            android:text="@string/showToastButtonLabel" />
 
         <Button
-            android:id="@+id/bnt_go_to_activityB"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/nextActivityButtonLabel"
-            android:textSize="?attr/minTouchTargetSize" />
+            android:text="@string/btnRequestPermissionsLabel"
+            android:id="@+id/btnRequestPermissions" />
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnShowToast"
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/showToastButtonLabel" />
+        android:layout_height="match_parent"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_header_menu"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btnRequestPermissionsLabel"
-        android:id="@+id/btnRequestPermissions" />
+
+
 
     <LinearLayout
         style="?attr/buttonBarButtonStyle"
@@ -155,4 +176,4 @@
             android:text="@string/loadAnyDataLabel" />
     </LinearLayout>
 
-</LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
