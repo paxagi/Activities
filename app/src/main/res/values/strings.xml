@@ -38,4 +38,11 @@
     <string name="activity_a_title">Activity A</string>
     <string name="activity_b_title">Activity B</string>
     <string name="activity_c_title">Activity C</string>
+    <string name="item_goToC">to upload Image</string>
+    <string name="item_goToD">to separate screen</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_top_fragment">I\'m blue</string>
+    <string name="hello_bottom_fragment">I\'m green ♻</string>
+    <string name="saveAnyDataLabelCAPS">SAVE</string>
+    <string name="loadAnyDataLabel">Load</string>
 </resources>
