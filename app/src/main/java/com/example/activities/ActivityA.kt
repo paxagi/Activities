@@ -1,10 +1,15 @@
 package com.example.activities
 
 import android.Manifest
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
+import android.content.ServiceConnection
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.IBinder
 import android.text.Editable
 import android.util.Log
 import android.view.View
@@ -16,6 +21,7 @@ import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -37,6 +43,16 @@ class ActivityA : AppCompatActivity() {
     private lateinit var difficultLevels: List<String>
     private lateinit var btnSavePersonData: Button
     private lateinit var btnLoadPersonData: Button
+    private lateinit var btnStartService1: Button
+    private lateinit var btnStopService1: Button
+    private lateinit var tvServiceStatus1: TextView
+    private lateinit var btnStartService2: Button
+    private lateinit var btnStopService2: Button
+    private lateinit var tvServiceStatus2: TextView
+    private lateinit var getServiceData: Button
+    private lateinit var etServiceData: EditText
+    private lateinit var mService: MyService
+    private var mBound: Boolean = false
 
     private fun initViews() {
         etName = findViewById(R.id.first_name)
@@ -54,6 +70,26 @@ class ActivityA : AppCompatActivity() {
         difficultLevels = resources.getStringArray(R.array.difficultLevels).toList()
         btnSavePersonData = findViewById(R.id.btnSavePersonData)
         btnLoadPersonData = findViewById(R.id.btnLoadPersonData)
+        btnStartService1 = findViewById(R.id.btnStartService1)
+        btnStopService1 = findViewById(R.id.btnStopService1)
+        tvServiceStatus1 = findViewById(R.id.tvServiceStatus1)
+        btnStartService2 = findViewById(R.id.btnStartService2)
+        btnStopService2 = findViewById(R.id.btnStopService2)
+        tvServiceStatus2 = findViewById(R.id.tvServiceStatus2)
+        getServiceData = findViewById(R.id.getServiceData)
+    }
+
+    private val connection = object : ServiceConnection {
+
+        override fun onServiceConnected(className: ComponentName, service: IBinder) {
+            val binder = service as MyService.MyBinder
+            mService = binder.getService()
+            mBound = true
+        }
+
+        override fun onServiceDisconnected(arg0: ComponentName) {
+            mBound = false
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -150,6 +186,45 @@ class ActivityA : AppCompatActivity() {
             etSurname.setText(surname)
             etBirthday.setText(birthday)
             etCountry.setText(country)
+        }
+
+        btnStartService1.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                    0
+                )
+            }
+            Intent(this, RunningService::class.java).also {
+                it.action = RunningService.Action.START.toString()
+                startService(it)
+                tvServiceStatus1.text = getString(R.string.serviceRunning)
+            }
+        }
+        btnStopService1.setOnClickListener {
+            Intent(this, RunningService::class.java).also {
+                it.action = RunningService.Action.STOP.toString()
+                startService(it)
+                tvServiceStatus1.text = getString(R.string.serviceStopped)
+            }
+        }
+
+        btnStartService2.setOnClickListener {
+            Intent(this, MyService::class.java).also {
+                bindService(it, connection, Context.BIND_AUTO_CREATE)
+            }
+        }
+        btnStopService2.setOnClickListener {
+            if (mBound) (unbindService(connection))
+            mBound = false
+        }
+        getServiceData.setOnClickListener {
+            tvServiceStatus2.text = if (mBound) {
+                mService.greeting()
+            } else {
+                "Service not active"
+            }
         }
     }
 
@@ -266,7 +341,8 @@ class ActivityA : AppCompatActivity() {
         if (clearPurposePermissionsToRequest.isEmpty() && locationPermissionSToRequest.isEmpty()) {
             Log.d("permissions", "all necessary permissions has been granted")
         }
-    }}
+    }
+}
 
 const val EXTRA_PERSON_DATA_NAME = "EXTRA_PERSON"
 const val CLEAR_PURPOSE_PERMISSIONS_REQUESTS_CODE = 0
