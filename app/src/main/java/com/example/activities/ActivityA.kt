@@ -1,8 +1,12 @@
 package com.example.activities
 
 import android.Manifest
+import android.bluetooth.BluetoothAdapter
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.net.wifi.WifiManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -43,6 +47,8 @@ class ActivityA : AppCompatActivity() {
     private lateinit var navView: NavigationView
     private lateinit var btnSavePersonData: Button
     private lateinit var btnLoadPersonData: Button
+    private lateinit var bluetoothReceiver: BluetoothChangeReceiver
+    private lateinit var wifiReceiver: WifiChangeReceiver
 
     private fun initViews() {
         etName = findViewById(R.id.first_name)
@@ -62,6 +68,8 @@ class ActivityA : AppCompatActivity() {
         navView = findViewById(R.id.navView)
         btnSavePersonData = findViewById(R.id.btnSavePersonData)
         btnLoadPersonData = findViewById(R.id.btnLoadPersonData)
+        bluetoothReceiver = BluetoothChangeReceiver()
+        wifiReceiver = WifiChangeReceiver()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -176,6 +184,27 @@ class ActivityA : AppCompatActivity() {
             etBirthday.setText(birthday)
             etCountry.setText(country)
         }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.BLUETOOTH_CONNECT), 2)
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION).also {
+                registerReceiver(wifiReceiver, it, RECEIVER_NOT_EXPORTED)
+            }
+            IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED).also {
+                registerReceiver(bluetoothReceiver, it, RECEIVER_NOT_EXPORTED)
+            }
+        } else {
+            IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION).also {
+                registerReceiver(wifiReceiver, it)
+            }
+            IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED).also {
+                registerReceiver(bluetoothReceiver, it)
+            }
+        }
     }
 
     override fun onStart() {
@@ -196,6 +225,8 @@ class ActivityA : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         Log.d("lifecycle", "onStop: A")
+        unregisterReceiver(bluetoothReceiver)
+        unregisterReceiver(wifiReceiver)
     }
 
     override fun onRestart() {

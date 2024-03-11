@@ -45,4 +45,8 @@
     <string name="hello_bottom_fragment">I\'m green ♻</string>
     <string name="saveAnyDataLabelCAPS">SAVE</string>
     <string name="loadAnyDataLabel">Load</string>
+    <string name="bluetooth_enabled_label">Bluetooth enabled</string>
+    <string name="bluetooth_disabled_label">Bluetooth disabled</string>
+    <string name="wifi_enabled_label">Wifi enabled</string>
+    <string name="wifi_disabled_label">Wifi disabled</string>
 </resources>
