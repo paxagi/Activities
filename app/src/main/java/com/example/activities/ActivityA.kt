@@ -144,6 +144,7 @@ class ActivityA : AppCompatActivity() {
                 R.id.miA -> Intent(this, ActivityA::class.java)
                 R.id.miB -> Intent(this, ActivityB::class.java)
                 R.id.miC -> Intent(this, ActivityC::class.java)
+                R.id.miK -> Intent(this, ActivityK::class.java)
                 else -> null
             }?.let { activity -> startActivity(activity) }
             true

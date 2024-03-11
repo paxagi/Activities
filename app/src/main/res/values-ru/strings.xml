@@ -45,4 +45,5 @@
     <string name="hello_bottom_fragment">Я зеленый</string>
     <string name="saveAnyDataLabelCAPS">СОХРАНИТЬ</string>
     <string name="loadAnyDataLabel">Загрузить</string>
+    <string name="activity_k_title">перетаскивание</string>
 </resources>
