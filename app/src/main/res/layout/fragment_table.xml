@@ -8,14 +8,14 @@
     android:layout_height="match_parent"
     tools:context=".DNDFragment">
 
-        <FrameLayout
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/flTop"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
 
-        <FrameLayout
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/flBottom"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

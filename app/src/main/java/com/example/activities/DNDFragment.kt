@@ -25,10 +25,14 @@ class DNDFragment() : Fragment() {
             replace(R.id.flBottom, TableBottomFragment())
             commit()
         }
+    }
 
-        val llTop = view.findViewById<LinearLayout>(R.id.llTop)
-        val llBottom = view.findViewById<LinearLayout>(R.id.llBottom)
-        val dragView = view.findViewById<View>(R.id.dragView)
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+
+        val llTop = requireView().findViewById<LinearLayout>(R.id.llTop)
+        val llBottom = requireView().findViewById<LinearLayout>(R.id.llBottom)
+        val dragView = requireView().findViewById<View>(R.id.dragView)
         dragView.setOnLongClickListener{
             val clipText = "This is our ClipData text"
             val item = ClipData.Item(clipText)
