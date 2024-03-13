@@ -53,13 +53,13 @@ class ActivityC : AppCompatActivity() {
             R.drawable.img4,
         )
 
-        changeFragment(HomeFragment(), "home")
+        changeFragment({ HomeFragment() }, "home")
         bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId) {
-                R.id.miHome -> changeFragment(HomeFragment(), "home")
-                R.id.miMessages -> changeFragment(MessagesFragment(), "message")
+                R.id.miHome -> changeFragment({ HomeFragment() }, "home")
+                R.id.miMessages -> changeFragment({ MessagesFragment() }, "message")
                 R.id.miProfile -> changeFragment(
-                    ProfileFragment.newInstance(images),
+                    { ProfileFragment.newInstance(images) },
                     "profile"
                 )
             }
@@ -125,7 +125,7 @@ class ActivityC : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean = MenuListener().create(this, menu)
     override fun onOptionsItemSelected(item: MenuItem): Boolean = MenuListener().itemSelected(this, item)
 
-    private fun changeFragment(fragment: Fragment, tagFragmentName: String) {
+    private fun changeFragment(fragmentInit: (()->Fragment?), tagFragmentName: String) {
         var currentFragment: Fragment?
         var fragmentTemp: Fragment?
         supportFragmentManager.apply {
@@ -134,7 +134,7 @@ class ActivityC : AppCompatActivity() {
         }.beginTransaction().apply {
             currentFragment?.let { hide(it) }
             if (fragmentTemp == null) {
-                fragmentTemp = fragment
+                fragmentTemp = fragmentInit()
                 add(R.id.flFragment, fragmentTemp!!, tagFragmentName)
             } else {
                 show(fragmentTemp!!)
