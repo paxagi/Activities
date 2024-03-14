@@ -33,6 +33,12 @@
     <string name="favoritesLabel">Избранное</string>
     <string name="feedbackRequest">Дать обратную связь</string>
     <string name="closeLabel">Закрыть</string>
+    <string name="bottom_menu_home_label">Домой</string>
+    <string name="bottom_menu_messages_label">Сообщения</string>
+    <string name="bottom_menu_profile_label">Профиль</string>
+    <string name="sweetHomeLabel">Дом, милый дом.</string>
+    <string name="noMessagesLabel">Полковнику никто не пишет</string>
+    <string name="profileLabel">Досье</string>
     <string name="my_activities_label">Мои активити</string>
     <string name="openLabel">Открыть</string>
     <string name="activity_a_title">экран А</string>

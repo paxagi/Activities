@@ -25,12 +25,12 @@ class ActivityB : AppCompatActivity() {
     private lateinit var textView3: TextView
     private lateinit var textView4: TextView
     private lateinit var textView5: TextView
-    lateinit var spSelectNextActivity: Spinner
+    private lateinit var spSelectNextActivity: Spinner
     private lateinit var rvInterests: RecyclerView
 
     private fun initViews() {
-        editDescription = findViewById<EditText>(R.id.editTextTextB)
-        btnNextActivity = findViewById<Button>(R.id.bnt_go_to_activity_C_or_D)
+        editDescription = findViewById(R.id.editTextTextB)
+        btnNextActivity = findViewById(R.id.bnt_go_to_activity_C_or_D)
         textView1 = findViewById(R.id.textView1)
         textView2 = findViewById(R.id.textView2)
         textView3 = findViewById(R.id.textView3)
@@ -91,7 +91,7 @@ class ActivityB : AppCompatActivity() {
             }
         }
 
-        var interestsList = mutableListOf(
+        val interestsList = mutableListOf(
             Interest(R.drawable.avatar, "Android"),
             Interest(R.drawable.avatar, "Kotlin"),
             Interest(R.drawable.avatar, "Poker"),
