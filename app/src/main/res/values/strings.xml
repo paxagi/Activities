@@ -51,4 +51,5 @@
     <string name="hello_bottom_fragment">I\'m green ♻</string>
     <string name="saveAnyDataLabelCAPS">SAVE</string>
     <string name="loadAnyDataLabel">Load</string>
+    <string name="activity_k_title"><![CDATA[drag&drop]]></string>
 </resources>
