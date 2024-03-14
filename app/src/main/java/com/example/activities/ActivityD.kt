@@ -43,7 +43,7 @@ class ActivityD : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         Log.d("lifecycle", "onResume: D")
-        if (activeActivity == this::class) {
+        if (isStopped && isPaused) {
             if (ActivityCompat.checkSelfPermission(
                     this,
                     Manifest.permission.POST_NOTIFICATIONS
@@ -51,13 +51,19 @@ class ActivityD : AppCompatActivity() {
                 notifications.apply { notificationManager.notify(0, wakeUp) }
             }
         }
-        activeActivity = this::class
+        isPaused = false
+        isStopped = false
+    }
+
+    override fun onPause() {
+        super.onPause()
+        isPaused = true
     }
 
     override fun onStop() {
         super.onStop()
         Log.d("lifecycle", "onStop: D")
-        if (activeActivity == this::class) {
+        if (isPaused) {
             if (ActivityCompat.checkSelfPermission(
                     this,
                     Manifest.permission.POST_NOTIFICATIONS
@@ -65,6 +71,7 @@ class ActivityD : AppCompatActivity() {
                 notifications.apply { notificationManager.notify(0, sleep) }
             }
         }
+        isStopped = isPaused
     }
     private fun swapFragmentsAKABookkeeping(
         poopa: Int, poopaFragment: Fragment,

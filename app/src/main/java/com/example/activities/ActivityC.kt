@@ -72,7 +72,7 @@ class ActivityC : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         Log.d("lifecycle", "onResume: C")
-        if (activeActivity == this::class) {
+        if (isStopped && isPaused) {
             if (ActivityCompat.checkSelfPermission(
                     this,
                     Manifest.permission.POST_NOTIFICATIONS
@@ -80,18 +80,20 @@ class ActivityC : AppCompatActivity() {
                 notifications.apply { notificationManager.notify(0, wakeUp) }
             }
         }
-        activeActivity = this::class
+        isPaused = false
+        isStopped = false
     }
 
     override fun onPause() {
         super.onPause()
         Log.d("lifecycle", "onPause: C")
+        isPaused = true
     }
 
     override fun onStop() {
         super.onStop()
         Log.d("lifecycle", "onStop: C")
-        if (activeActivity == this::class) {
+        if (isPaused) {
             if (ActivityCompat.checkSelfPermission(
                     this,
                     Manifest.permission.POST_NOTIFICATIONS
@@ -99,6 +101,7 @@ class ActivityC : AppCompatActivity() {
                 notifications.apply { notificationManager.notify(0, sleep) }
             }
         }
+        isStopped = isPaused
     }
 
     override fun onRestart() {

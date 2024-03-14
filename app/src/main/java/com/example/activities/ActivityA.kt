@@ -121,7 +121,7 @@ class ActivityA : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
-        notifications = Notifications(this)
+        notifications = Notifications(applicationContext)
     }
 
     override fun onStart() {
@@ -132,7 +132,7 @@ class ActivityA : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         Log.d("lifecycle", "onResume: A")
-        if (activeActivity == this::class) {
+        if (isStopped && isPaused) {
             if (ActivityCompat.checkSelfPermission(
                     this,
                     Manifest.permission.POST_NOTIFICATIONS
@@ -140,18 +140,20 @@ class ActivityA : AppCompatActivity() {
                 notifications.apply { notificationManager.notify(0, wakeUp) }
             }
         }
-        activeActivity = this::class
+        isPaused = false
+        isStopped = false
     }
 
     override fun onPause() {
         super.onPause()
         Log.d("lifecycle", "onPause: A")
+        isPaused = true
     }
 
     override fun onStop() {
         super.onStop()
         Log.d("lifecycle", "onStop: A")
-        if (activeActivity == this::class) {
+        if (isPaused) {
             if (ActivityCompat.checkSelfPermission(
                     this,
                     Manifest.permission.POST_NOTIFICATIONS
@@ -159,6 +161,7 @@ class ActivityA : AppCompatActivity() {
                 notifications.apply { notificationManager.notify(0, sleep) }
             }
         }
+        isStopped = isPaused
     }
 
     override fun onRestart() {
@@ -256,7 +259,9 @@ class ActivityA : AppCompatActivity() {
         }
     }}
 
-var activeActivity: KClass<out AppCompatActivity>? = null
+var isPaused = true
+var isStopped = true
+
 lateinit var notifications: Notifications
 
 const val EXTRA_PERSON_DATA_NAME = "EXTRA_PERSON"
