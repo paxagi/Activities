@@ -17,9 +17,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.widget.addTextChangedListener
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
 
 class ActivityA : AppCompatActivity() {
     private lateinit var etName: EditText
@@ -35,6 +38,11 @@ class ActivityA : AppCompatActivity() {
     private lateinit var btnRequestPermissions: Button
     private lateinit var spDifficultLevels: Spinner
     private lateinit var difficultLevels: List<String>
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var toggle: ActionBarDrawerToggle
+    private lateinit var navView: NavigationView
+    private lateinit var btnSavePersonData: Button
+    private lateinit var btnLoadPersonData: Button
 
     private fun initViews() {
         etName = findViewById(R.id.first_name)
@@ -42,14 +50,18 @@ class ActivityA : AppCompatActivity() {
         city = findViewById(R.id.etCity)
         street = findViewById(R.id.etStreet)
         house = findViewById(R.id.etHouse)
-        btnApply = findViewById<Button>(R.id.btn_apply)
-        btnShowToast = findViewById<Button>(R.id.btnShowToast)
-        etSurname = findViewById<EditText>(R.id.etSurname)
-        etBirthday = findViewById<EditText>(R.id.editBirthday)
-        etCountry = findViewById<EditText>(R.id.etCountry)
-        btnRequestPermissions = findViewById<Button>(R.id.btnRequestPermissions)
+        btnApply = findViewById(R.id.btn_apply)
+        btnShowToast = findViewById(R.id.btnShowToast)
+        etSurname = findViewById(R.id.etSurname)
+        etBirthday = findViewById(R.id.editBirthday)
+        etCountry = findViewById(R.id.etCountry)
+        btnRequestPermissions = findViewById(R.id.btnRequestPermissions)
         spDifficultLevels = findViewById(R.id.spDifficultLevels)
         difficultLevels = resources.getStringArray(R.array.difficultLevels).toList()
+        drawerLayout = findViewById(R.id.drawerLayout)
+        navView = findViewById(R.id.navView)
+        btnSavePersonData = findViewById(R.id.btnSavePersonData)
+        btnLoadPersonData = findViewById(R.id.btnLoadPersonData)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -118,6 +130,51 @@ class ActivityA : AppCompatActivity() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+        }
+
+        toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.openLabel, R.string.closeLabel)
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        navView.setNavigationItemSelectedListener {
+            when(it.itemId) {
+                R.id.miA -> Intent(this, ActivityA::class.java)
+                R.id.miB -> Intent(this, ActivityB::class.java)
+                R.id.miC -> Intent(this, ActivityC::class.java)
+                else -> null
+            }?.let { activity -> startActivity(activity) }
+            true
+        }
+
+        val sharedPreferences = getSharedPreferences("myPref", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        btnSavePersonData.setOnClickListener {
+            val name = etName.text.toString()
+            val surname = etSurname.text.toString()
+            val birthday = etBirthday.text.toString()
+            val country = etCountry.text.toString()
+
+            editor.apply {
+                putString("name", name)
+                putString("surname", surname)
+                putString("birthday", birthday)
+                putString("country", country)
+                apply()
+            }
+        }
+        btnLoadPersonData.setOnClickListener {
+            val name = sharedPreferences.getString("name", "")
+            val surname = sharedPreferences.getString("surname", "")
+            val birthday = sharedPreferences.getString("birthday", "")
+            val country = sharedPreferences.getString("country", "India")
+
+            etName.setText(name)
+            etSurname.setText(surname)
+            etBirthday.setText(birthday)
+            etCountry.setText(country)
         }
     }
 
@@ -152,7 +209,13 @@ class ActivityA : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean = MenuListener().create(this, menu)
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = MenuListener().itemSelected(this, item)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = MenuListener().let {
+        it.itemSelected(this, item)
+        if (toggle.onOptionsItemSelected(item)) {
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,

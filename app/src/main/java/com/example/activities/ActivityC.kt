@@ -10,8 +10,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationBarView
 
 
@@ -27,10 +25,10 @@ class ActivityC : AppCompatActivity() {
         setContentView(R.layout.activity_c)
 
         val message = intent.getStringExtra("msg")
-        editDescription = findViewById<EditText>(R.id.edit_description)
-        ivPhoto = findViewById<ImageView>(R.id.ivPhotoOrPDF)
-        btnTakePhotoOrPDF = findViewById<Button>(R.id.btnTakePhotoOrPDF)
-        statusOfSelectedResource = findViewById<TextView>(R.id.statusOfSelectedResource)
+        editDescription = findViewById(R.id.edit_description)
+        ivPhoto = findViewById(R.id.ivPhotoOrPDF)
+        btnTakePhotoOrPDF = findViewById(R.id.btnTakePhotoOrPDF)
+        statusOfSelectedResource = findViewById(R.id.statusOfSelectedResource)
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
 
         editDescription.setText(message)
