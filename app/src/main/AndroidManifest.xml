@@ -19,6 +19,9 @@
         android:theme="@style/Theme.Activities"
         tools:targetApi="31">
         <activity
+            android:name=".ActivityK"
+            android:exported="false" />
+        <activity
             android:name=".ActivityD"
             android:exported="false" />
         <activity

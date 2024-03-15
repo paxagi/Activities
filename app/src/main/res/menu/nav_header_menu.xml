@@ -13,4 +13,8 @@
         android:id="@+id/miC"
         android:title="@string/activity_c_title" />
 
+    <item
+        android:id="@+id/miK"
+        android:title="@string/activity_k_title" />
+
 </menu>

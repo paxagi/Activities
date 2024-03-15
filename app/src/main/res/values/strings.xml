@@ -33,6 +33,12 @@
     <string name="favoritesLabel">Favorites</string>
     <string name="feedbackRequest">Give Feedback</string>
     <string name="closeLabel">Close</string>
+    <string name="bottom_menu_home_label">Home</string>
+    <string name="bottom_menu_messages_label">Messages</string>
+    <string name="bottom_menu_profile_label">Profile</string>
+    <string name="sweetHomeLabel">Home, sweet home.</string>
+    <string name="noMessagesLabel">just empty</string>
+    <string name="profileLabel">not OK, mb VK</string>
     <string name="my_activities_label">My Activities</string>
     <string name="openLabel">Open</string>
     <string name="activity_a_title">Activity A</string>
@@ -49,4 +55,5 @@
     <string name="bluetooth_disabled_label">Bluetooth disabled</string>
     <string name="wifi_enabled_label">Wifi enabled</string>
     <string name="wifi_disabled_label">Wifi disabled</string>
+    <string name="activity_k_title"><![CDATA[drag&drop]]></string>
 </resources>

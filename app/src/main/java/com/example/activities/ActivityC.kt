@@ -1,30 +1,35 @@
 package com.example.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.view.MenuItem
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.google.android.material.navigation.NavigationBarView
+
 
 class ActivityC : AppCompatActivity() {
     private lateinit var editDescription: EditText
     private lateinit var ivPhoto: ImageView
     private lateinit var btnTakePhotoOrPDF: Button
     private lateinit var statusOfSelectedResource: TextView
+    private lateinit var bottomNavigationView: NavigationBarView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("lifecycle", "onCreate: C")
         setContentView(R.layout.activity_c)
 
         val message = intent.getStringExtra("msg")
-        editDescription = findViewById<EditText>(R.id.edit_description)
-        ivPhoto = findViewById<ImageView>(R.id.ivPhotoOrPDF)
-        btnTakePhotoOrPDF = findViewById<Button>(R.id.btnTakePhotoOrPDF)
-        statusOfSelectedResource = findViewById<TextView>(R.id.statusOfSelectedResource)
+        editDescription = findViewById(R.id.edit_description)
+        ivPhoto = findViewById(R.id.ivPhotoOrPDF)
+        btnTakePhotoOrPDF = findViewById(R.id.btnTakePhotoOrPDF)
+        statusOfSelectedResource = findViewById(R.id.statusOfSelectedResource)
+        bottomNavigationView = findViewById(R.id.bottomNavigationView)
 
         editDescription.setText(message)
         setResult(RESULT_OK, intent.putExtra("back msg", "back to C"))
@@ -37,6 +42,30 @@ class ActivityC : AppCompatActivity() {
                 it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
                 startActivityForResult(it, 0)
             }
+        }
+
+        val images = arrayListOf<Int>(
+            R.drawable.img1,
+            R.drawable.img2,
+            R.drawable.img3,
+            R.drawable.img4,
+        )
+
+        changeFragment({ HomeFragment() }, "home")
+        bottomNavigationView.setOnItemSelectedListener {
+            when(it.itemId) {
+                R.id.miHome -> changeFragment({ HomeFragment() }, "home")
+                R.id.miMessages -> changeFragment({ MessagesFragment() }, "message")
+                R.id.miProfile -> changeFragment(
+                    { ProfileFragment.newInstance(images) },
+                    "profile"
+                )
+            }
+            return@setOnItemSelectedListener true
+        }
+        bottomNavigationView.getOrCreateBadge(R.id.miMessages).apply {
+            number = 0
+            isVisible = true
         }
     }
 
@@ -94,4 +123,24 @@ class ActivityC : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean = MenuListener().create(this, menu)
     override fun onOptionsItemSelected(item: MenuItem): Boolean = MenuListener().itemSelected(this, item)
 
+    private fun changeFragment(fragmentInit: (()->Fragment?), tagFragmentName: String) {
+        var currentFragment: Fragment?
+        var fragmentTemp: Fragment?
+        supportFragmentManager.apply {
+            currentFragment = primaryNavigationFragment
+            fragmentTemp = findFragmentByTag(tagFragmentName)
+        }.beginTransaction().apply {
+            currentFragment?.let { hide(it) }
+            if (fragmentTemp == null) {
+                fragmentTemp = fragmentInit()
+                add(R.id.flFragment, fragmentTemp!!, tagFragmentName)
+            } else {
+                show(fragmentTemp!!)
+            }
+
+            setPrimaryNavigationFragment(fragmentTemp)
+            setReorderingAllowed(true)
+            commitNowAllowingStateLoss()
+        }
+    }
 }

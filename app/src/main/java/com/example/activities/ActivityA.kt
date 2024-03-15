@@ -56,12 +56,12 @@ class ActivityA : AppCompatActivity() {
         city = findViewById(R.id.etCity)
         street = findViewById(R.id.etStreet)
         house = findViewById(R.id.etHouse)
-        btnApply = findViewById<Button>(R.id.btn_apply)
-        btnShowToast = findViewById<Button>(R.id.btnShowToast)
-        etSurname = findViewById<EditText>(R.id.etSurname)
-        etBirthday = findViewById<EditText>(R.id.editBirthday)
-        etCountry = findViewById<EditText>(R.id.etCountry)
-        btnRequestPermissions = findViewById<Button>(R.id.btnRequestPermissions)
+        btnApply = findViewById(R.id.btn_apply)
+        btnShowToast = findViewById(R.id.btnShowToast)
+        etSurname = findViewById(R.id.etSurname)
+        etBirthday = findViewById(R.id.editBirthday)
+        etCountry = findViewById(R.id.etCountry)
+        btnRequestPermissions = findViewById(R.id.btnRequestPermissions)
         spDifficultLevels = findViewById(R.id.spDifficultLevels)
         difficultLevels = resources.getStringArray(R.array.difficultLevels).toList()
         drawerLayout = findViewById(R.id.drawerLayout)
@@ -152,6 +152,7 @@ class ActivityA : AppCompatActivity() {
                 R.id.miA -> Intent(this, ActivityA::class.java)
                 R.id.miB -> Intent(this, ActivityB::class.java)
                 R.id.miC -> Intent(this, ActivityC::class.java)
+                R.id.miK -> Intent(this, ActivityK::class.java)
                 else -> null
             }?.let { activity -> startActivity(activity) }
             true
